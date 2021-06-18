@@ -1,46 +1,49 @@
 from pytwitterscraper import TwitterScraper
+from time import sleep 
 import datetime
-import re 
+
  # 推特
 def getPullTwitter():
 
     #人名：twitter_id
     users = {'马斯克':'elonmusk'}
+    while True:
+        array = []
+        
+        for key in users.keys():
+            tw = TwitterScraper()
+            profile = tw.get_profile(name=users[key])
+            # 获取前10条推特
+            tweets = tw.get_tweets(profile.__dict__['id'],count=10)
+            tweets_infos = tweets.contents
+            # 根据时间排序
+            tweets_infos.sort(key = lambda item: item['created_at'], reverse=True)
 
-    array = []
-    for key in users.keys():
-        tw = TwitterScraper()
-        profile = tw.get_profile(name=users[key])
-        # 获取前10条推特
-        tweets = tw.get_tweets(profile.__dict__['id'],count=10)
-        tweets_infos = tweets.contents
-        # 根据时间排序
-        tweets_infos.sort(key = lambda item: item['created_at'], reverse=True)
+            # array[0]:   name(elonmusk), mesbody, url, image_url
+            line = []
+            for info in tweets_infos:
+                text = info['text']
+                media = info['media']
 
-        # array[0]:   name(elonmusk), mesbody, url, image_url
-        line = []
-        for info in tweets_infos:
-            text = info['text']
-            media = info['media']
+                mesbody = text 
+                url = ''
+                image_url = ''
 
-            mesbody = text 
-            url = ''
-            image_url = ''
-
-            #str.find(sub_s): 找到了返回第一个位置索引，没找到返回-1
-            idx = text.find('http')
-            if idx!=-1:
-                url = text[idx:]
-                mesbody = text[:idx]
-            
-            if media!=[] and media[0]['type']=='photo':
-                image_url = media[0]['image_url']
-                if url == '':
-                    url = media[0]['url']
-            line = ['elonmusk', mesbody, url, image_url]
-              
-        print(line)
-
+                #str.find(sub_s): 找到了返回第一个位置索引，没找到返回-1
+                idx = text.find('http')
+                if idx!=-1:
+                    url = text[idx:]
+                    mesbody = text[:idx]
+                
+                if media!=[] and media[0]['type']=='photo':
+                    image_url = media[0]['image_url']
+                    if url == '':
+                        url = media[0]['url']
+                line = ['elonmusk', mesbody, url, image_url]
+                print(line)
+                
+        sleep(300)
+        print("Waite 5 minutes")
     return array 
 
 
