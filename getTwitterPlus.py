@@ -41,9 +41,10 @@ def getPullTwitter():
                         url = media[0]['url']
                 line = ['elonmusk', mesbody, url, image_url]
                 print(line)
-                
-        sleep(300)
+
+        
         print("Waite 5 minutes")
+        sleep(300)
     return array 
 
 
