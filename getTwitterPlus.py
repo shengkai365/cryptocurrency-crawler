@@ -1,7 +1,7 @@
 from pytwitterscraper import TwitterScraper
 from time import sleep 
 import datetime
-
+from sql_insert import insert
  # 推特
 def getPullTwitter():
 
@@ -40,9 +40,8 @@ def getPullTwitter():
                     if url == '':
                         url = media[0]['url']
                 line = ['elonmusk', mesbody, url, image_url]
-                print(line)
+            insert(url,mesbody)
 
-        
         print("Waite 5 minutes")
         sleep(300)
     return array 
