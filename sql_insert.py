@@ -22,7 +22,7 @@ def insert(url,mesbody):
     # title
     hash_str = hashlib.sha224(mesbody.encode('utf-8')).hexdigest()
     # times
-    insertTimes = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    insertTimes = (datetime.datetime.now()+datetime.timedelta(hours=9)).strftime("%Y-%m-%d %H:%M:%S")
 
     param=(hash_str,url,insertTimes,mesbody)
     
@@ -36,4 +36,3 @@ def insert(url,mesbody):
     #关闭连接
     conn.close()
     cursor.close()
-
