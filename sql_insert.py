@@ -2,7 +2,7 @@
 import pymysql
 import hashlib 
 import datetime
-from googletrans import Translator
+from google_trans_new import google_translator
 
 def insert(key,url,mesbody):
     config = {
@@ -27,10 +27,10 @@ def insert(key,url,mesbody):
     insertTimes = (datetime.datetime.now()+datetime.timedelta(hours=9)).strftime("%Y-%m-%d %H:%M:%S")
 
     # 翻译成中文
-    trans = Translator()
-    en2cn = trans.translate(mesbody, dest='zh-cn', src='en')
+    trans = google_translator()  
+    en2cn = trans.translate(mesbody, lang_tgt='zh-cn', lang_src='en')
      
-    param=(mesbody,url,insertTimes,en2cn.text,'Twitter-{}'.format(key))
+    param=(mesbody,url,insertTimes,en2cn,'Twitter-{}'.format(key))
     
     #执行数据库插入操作
     try:
@@ -42,5 +42,5 @@ def insert(key,url,mesbody):
     #关闭连接
     conn.close()
     cursor.close()
-
+insert('马斯克','www','hello world')
 
