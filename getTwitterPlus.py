@@ -2,11 +2,11 @@ from pytwitterscraper import TwitterScraper
 from time import sleep 
 import datetime
 from sql_insert import insert
+ 
  # 推特
 def getPullTwitter():
-
     #人名：twitter_id
-    users = {'马斯克':'elonmusk'}
+    users = {'马斯克':'elonmusk','Coinbase':'CoinbasePro','孙宇晨':'justinsuntron','赵长鹏':'justinsuntron','灰度创始人':'BarrySilbert'}
     while True:
         array = []
         
@@ -39,8 +39,8 @@ def getPullTwitter():
                     image_url = media[0]['image_url']
                     if url == '':
                         url = media[0]['url']
-                line = ['elonmusk', mesbody, url, image_url]
-                insert(url,mesbody)
+                # line = ['elonmusk', mesbody, url, image_url]
+                insert(key,url,mesbody)
 
         print("Waite 5 minutes")
         sleep(300)
