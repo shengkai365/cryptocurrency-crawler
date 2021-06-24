@@ -24,23 +24,26 @@ def insert(key,url,mesbody):
     # hash_str = name + hashlib.sha224(mesbody.encode('utf-8')).hexdigest()
 
     # times
-    insertTimes = (datetime.datetime.now()+datetime.timedelta(hours=9)).strftime("%Y-%m-%d %H:%M:%S")
+    insertTimes = (datetime.datetime.now()+datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
 
-    # 翻译成中文
-    trans = google_translator()  
-    en2cn = trans.translate(mesbody, lang_tgt='zh-cn', lang_src='en')
-     
-    param=(mesbody,url,insertTimes,en2cn,'Twitter-{}'.format(key))
     
-    #执行数据库插入操作
+    
+    
     try:
+        # 翻译成中文
+        trans = google_translator()
+        en2cn = trans.translate(mesbody, lang_tgt='zh-cn', lang_src='en')
+    
+        param=(mesbody,url,insertTimes,en2cn,'Twitter-{}'.format(key))
+        #执行数据库插入操作
         cursor.execute(sql, param)
+
     except:
-        print('Title already exists')
+        print('Title already exists or translate connect error')
     #提交
     conn.commit()
     #关闭连接
     conn.close()
     cursor.close()
-insert('马斯克','www','hello world')
+
 

@@ -6,7 +6,7 @@ from sql_insert import insert
  # 推特
 def getPullTwitter():
     #人名：twitter_id
-    users = {'马斯克':'elonmusk','Coinbase':'CoinbasePro','孙宇晨':'justinsuntron','赵长鹏':'justinsuntron','灰度创始人':'BarrySilbert'}
+    users = {'马斯克':'elonmusk','Coinbase':'CoinbasePro','孙宇晨':'justinsuntron','赵长鹏':'cz_binance','灰度创始人':'BarrySilbert'}
     while True:
         array = []
         
