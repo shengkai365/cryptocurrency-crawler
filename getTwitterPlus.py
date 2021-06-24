@@ -40,7 +40,8 @@ def getPullTwitter():
                     if url == '':
                         url = media[0]['url']
                 # line = ['elonmusk', mesbody, url, image_url]
-                insert(key,url,mesbody)
+                if mesbody:
+                    insert(key,url,mesbody)
 
         print("Waite 5 minutes")
         sleep(300)
