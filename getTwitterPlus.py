@@ -43,7 +43,7 @@ def getPullTwitter():
                             url = media[0]['url']
                     # line = ['elonmusk', mesbody, url, image_url]
                     if mesbody:
-                        insert(key,url,mesbody)
+                        insert(key, mesbody)
         except:
             print('scrapy twitter error')
 

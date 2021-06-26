@@ -1,10 +1,10 @@
 #导入pymysql包
 import pymysql
-import hashlib 
+# import hashlib 
 import datetime
-from google_trans_new import google_translator
+# from google_trans_new import google_translator
 
-def insert(key,url,mesbody):
+def insert(key,mesbody):
     config = {
             "host": "118.31.36.41",
             "user": "quanzu",
@@ -18,7 +18,8 @@ def insert(key,url,mesbody):
 
     # sql语句中，用%s做占位符，参数用一个元组
     # channel_id=2，channel=名人言论 ，level=2  ，is_keywords=N ,keywords_id=0,status=0，
-    sql="insert into t_news_info_temp(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id,status) values(2,'名人言论',%s,%s,%s,%s,2,%s,'N',0,0)"
+    #INSERT INTO `shangtu`.`t_news_info` ( `channel_id`, `channel`, `title`, `url`, `times`, `mesbody`, `level`, `site`, `is_keywords`, `keywords_id`) VALUES ( '9', '实时推特', '孙宇晨： title', NULL, '2021-06-26 15:03:45', NULL, '2', 'Twitter-孙宇晨', 'N', '0',);
+    sql="insert into t_news_info(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id) values(9,'实时推特',%s,NULL,%s,NULL,2,%s,'N',0)"
     
     # # title
     # hash_str = name + hashlib.sha224(mesbody.encode('utf-8')).hexdigest()
@@ -26,24 +27,19 @@ def insert(key,url,mesbody):
     # times
     insertTimes = (datetime.datetime.now()+datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
 
-    
-    
-    
+    mesbody = key + '：'+ mesbody 
+    param=(mesbody, insertTimes, 'Twitter-{}'.format(key))
     try:
-        # 翻译成中文
-        trans = google_translator()
-        en2cn = trans.translate(mesbody, lang_tgt='zh-cn', lang_src='en')
-    
-        param=(mesbody,url,insertTimes,en2cn,'Twitter-{}'.format(key))
+        # # 翻译成中文
+        # trans = google_translator()
+        # en2cn = trans.translate(mesbody, lang_tgt='zh-cn', lang_src='en')
+        
         #执行数据库插入操作
         cursor.execute(sql, param)
-
     except:
-        print('Title already exists or translate connect error')
+        print('Title already exists')
     #提交
     conn.commit()
     #关闭连接
     conn.close()
     cursor.close()
-
-
