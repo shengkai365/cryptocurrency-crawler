@@ -27,7 +27,7 @@ def getPullTwitter():
                     text = info['text']
                     media = info['media']
 
-                    mesbody = text.replace('&amp;','')
+                    mesbody = text
                     url = ''
                     image_url = ''
 
