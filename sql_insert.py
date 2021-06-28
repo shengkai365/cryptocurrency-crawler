@@ -3,8 +3,8 @@ import pymysql
 import datetime
 from post import send_msg
 
-TABLE = 't_news_info_temp'
-# TABLE = 't_news_info'
+# TABLE = 't_news_info_temp'
+TABLE = 't_news_info'
 
 def insert(key,mesbody):
     config = {
@@ -40,7 +40,7 @@ def insert(key,mesbody):
         #执行数据库插入操作
         if len(lines)==0:
             cursor.execute(sql, param)
-            # send_msg(mesbody)
+            send_msg(mesbody)
         else:
             print('data exist')
             print(mesbody)
