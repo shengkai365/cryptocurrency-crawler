@@ -26,7 +26,7 @@ def insert(key,mesbody):
     mesbody = key + '：'+ mesbody 
     param=(mesbody, insertTimes, 'Twitter-{}'.format(key))
     
-    querySql = 'select * from t_news_info_temp where title="' + mesbody +  '" order by  id  desc limit 1'
+    querySql = 'select * from t_news_info_temp where title="' + mesbody + '" and channel_id=9' +  ' order by  id  desc limit 1'
     try:
         # # 翻译成中文
         # trans = google_translator()
@@ -39,7 +39,9 @@ def insert(key,mesbody):
         if len(lines)==0:
             cursor.execute(sql, param)
             send_msg(mesbody)
-
+        else:
+            print('data exist')
+            print(mesbody)
     except:
         print('Title already exists')
     #提交
@@ -47,3 +49,4 @@ def insert(key,mesbody):
     #关闭连接
     conn.close()
     cursor.close()
+

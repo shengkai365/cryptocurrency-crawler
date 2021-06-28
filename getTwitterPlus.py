@@ -16,7 +16,7 @@ def getPullTwitter():
                 tw = TwitterScraper()
                 profile = tw.get_profile(name=users[key])
                 # 获取前10条推特
-                tweets = tw.get_tweets(profile.__dict__['id'],count=2)
+                tweets = tw.get_tweets(profile.__dict__['id'],count=1)
                 tweets_infos = tweets.contents
                 # 根据时间排序
                 tweets_infos.sort(key = lambda item: item['created_at'], reverse=True)
