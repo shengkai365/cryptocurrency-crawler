@@ -3,6 +3,7 @@ import pymysql
 # import hashlib 
 import datetime
 # from google_trans_new import google_translator
+from post import send_msg
 
 def insert(key,mesbody):
     config = {
@@ -36,6 +37,8 @@ def insert(key,mesbody):
         
         #执行数据库插入操作
         cursor.execute(sql, param)
+        send_msg(mesbody)
+
     except:
         print('Title already exists')
     #提交
