@@ -50,6 +50,9 @@ def getPullTwitter():
         print("Waite 5 minutes")
         sleep(300)
     return array 
+s = 'Our BOND-USD &amp; LPT-USD order books are now in full-trading mode. Limit, market and stop orders are all now availabl…'
+a = s.replace('&amp;','')
+
 
 # tweets_infos = tweets.contents 格式如下：
 # '''
