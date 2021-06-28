@@ -27,7 +27,7 @@ def getPullTwitter():
                     text = info['text']
                     media = info['media']
 
-                    mesbody = text 
+                    mesbody = text.replace('&amp;','')
                     url = ''
                     image_url = ''
 
@@ -50,7 +50,6 @@ def getPullTwitter():
         print("Waite 5 minutes")
         sleep(300)
     return array 
-
 
 # tweets_infos = tweets.contents 格式如下：
 # '''
