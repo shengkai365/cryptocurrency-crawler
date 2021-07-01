@@ -1,29 +1,50 @@
 # from google_trans_new import google_translator
 import pymysql
 import datetime
-from post import send_msg
+from dbOparate import DbOpt
+from crawlerTwitter import CrawlerTwit
+users = {   
+    '马斯克':'elonmusk',
+    'Coinbase':'CoinbasePro', 
+    '孙宇晨':'justinsuntron',
+    '赵长鹏':'cz_binance',
+    '灰度创始人':'BarrySilbert'
+}
+def test_db(key, msg):
+    db_opt = DbOpt()
+    db_opt.TABLE = 't_news_info_temp'
+    db_opt.insert(key, msg)
 
-def search(title):
-    config = {
-            "host": "118.31.36.41",
-            "user": "quanzu",
-            "password": "quanzu_db_passowrd",
-            "database": "shangtu"
-        }
-    # 创建数据库连接
-    conn = pymysql.connect(host=config["host"],user=config["user"],password=config["password"],database=config["database"])
-    #获取一个游标对象
-    cursor=conn.cursor()
 
-    querySql = 'select * from t_news_info_temp where title="' + title +  '" order by  id  desc limit 1'
-    
-    cursor.execute(querySql)
-    lines = cursor.fetchall()
-    
-    #提交
-    conn.commit()
-    #关闭连接
-    conn.close()
-    cursor.close()
-    return lines 
+def test_crawler():
+    for key in users.keys():
+            craw = CrawlerTwit(users[key])
+            craw_data = craw.get_datas()
+
+            now = datetime.datetime.now()
+            for msg,time in craw_data:
+                print('now:',now)
+                print('time:',time)
+                delta_time = (now-time).seconds
+
+                # 超过5分钟不入库
+                if delta_time > 300:
+                    continue 
+                else:
+                    print("尝试插入: %s"% msg)
+
+if __name__=="__main__":
+
+    # ----------------------- |
+    # 测试数据插入是否正常
+    # 注释 send_msg!!!!!!!!!!
+    key = ''
+    msg = ''
+    test_db(key, msg)
+    # ----------------------——  |
+
+    # ----------------------- |
+    # 测试数据爬取是否正常
+    test_crawler()
+    # ----------------------——  |
 

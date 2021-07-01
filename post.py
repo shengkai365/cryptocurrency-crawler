@@ -9,4 +9,6 @@ def send_msg(mesbody):
         print(a)
         
     except Exception as r:
-        print("未知错误 %s"%r)
+        print("出错啦: %s" % r)
+        print(r.__traceback__.tb_frame.f_globals["__file__"])
+        print(r.__traceback__.tb_lineno)
