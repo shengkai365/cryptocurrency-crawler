@@ -23,9 +23,9 @@ def test_crawler():
 
             now = datetime.datetime.now()
             for msg,time in craw_data:
-                print('now:',now)
-                print('time:',time)
-                delta_time = (now-time).seconds
+                print('now:',now.timestamp)
+                print('time:',time.timestamp)
+                delta_time = (now.timestamp-time.timestamp).seconds
 
                 # 超过5分钟不入库
                 if delta_time > 300:
