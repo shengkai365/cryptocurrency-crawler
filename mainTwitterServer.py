@@ -23,7 +23,7 @@ if __name__=="__main__":
             for msg, time in craw_data:
 
                 # delta_time = (now-time).seconds
-                delta_time = now.timestamp-time.timestamp
+                delta_time = now.timestamp()-time.timestamp()
                 # 超过5分钟不入库
                 if delta_time > 300:
                     continue 
