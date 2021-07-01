@@ -12,6 +12,7 @@ class CrawlerTwit(object):
     def initial_id(self):
         try:
             tw = TwitterScraper()
+            print("type:",type(self.name),self.name)
             profile = tw.get_profile(name=self.name)
             self.id = profile.__dict__['id']
             print("---initial id: %s" % self.id)
