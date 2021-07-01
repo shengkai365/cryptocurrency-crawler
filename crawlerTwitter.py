@@ -14,6 +14,8 @@ class CrawlerTwit(object):
             tw = TwitterScraper()
             profile = tw.get_profile(name=self.name)
             self.id = profile.__dict__['id']
+            print("---initial id: %s" % self.id)
+
         except Exception as r:
             print("出错啦: %s" % r)
             print(r.__traceback__.tb_frame.f_globals["__file__"])
@@ -23,33 +25,34 @@ class CrawlerTwit(object):
     # 获取十条数据，形如：mesbody, created_time 
     # created_time 有时差
     def get_datas(self):
-        
+        data = []
+        # data[0]: mesbody, created_time
         # 获取前10条推特
         try:
             tw = TwitterScraper()
             tweets = tw.get_tweets(self.id, count=10)
             tweets_infos = tweets.contents
+
+            # 根据时间排序
+            tweets_infos.sort(key = lambda item: item['created_at'], reverse=True)
+            
+            for info in tweets_infos:
+                mesbody = info['text']
+                created_time = info['created_at']
+
+                #str.find(sub_s): 找到了返回第一个位置索引，没找到返回-1
+                idx = mesbody.find('http')
+                if idx!=-1:
+                    mesbody = mesbody[:idx]
+
+                if mesbody:
+                    data.append([mesbody, created_time])
+                    
         except Exception as r:
             print("出错啦: %s" % r)
             print(r.__traceback__.tb_frame.f_globals["__file__"])
             print(r.__traceback__.tb_lineno)
 
-        # 根据时间排序
-        tweets_infos.sort(key = lambda item: item['created_at'], reverse=True)
-
-        # array[0]: mesbody, created_time
-        data = []
-        for info in tweets_infos:
-            mesbody = info['text']
-            created_time = info['created_at']
-
-            #str.find(sub_s): 找到了返回第一个位置索引，没找到返回-1
-            idx = mesbody.find('http')
-            if idx!=-1:
-                mesbody = mesbody[:idx]
-
-            if mesbody:
-                data.append([mesbody, created_time])
         return data
 
 
