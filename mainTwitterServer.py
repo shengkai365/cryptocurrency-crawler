@@ -9,7 +9,6 @@ users = {
         '孙宇晨':'justinsuntron',
         '赵长鹏':'cz_binance',
         '灰度创始人':'BarrySilbert',
-        'TEST': 'shengkai666'
     }
 
 def run(TABLE=''):
