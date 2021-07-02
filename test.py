@@ -18,24 +18,25 @@ def test_db(key, msg):
 
 def test_crawler():
     for key in users.keys():
+            print('---------start---------')
             craw = CrawlerTwit(users[key])
             craw_data = craw.get_datas()
 
             now = datetime.datetime.now()
             for msg,time in craw_data:
-                print('------------------')
+                
                 print('now:',now)
                 print('time:',time)
                 delta_time = (now.timestamp()-time.timestamp())
                 print('delta_time', delta_time)
                 print('msg', msg)
-                print('---------------------')
+                
                 # 超过5分钟不入库
                 if delta_time > 300:
                     continue 
             
                 print("尝试插入: %s"% msg)
-
+            print('---------end------------\n\n\n')
 if __name__=="__main__":
 
     # ----------------------- |
