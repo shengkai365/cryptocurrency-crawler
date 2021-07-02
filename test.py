@@ -4,6 +4,7 @@ import datetime
 from dbOparate import DbOpt
 from crawlerTwitter import CrawlerTwit
 from time import sleep
+from mainTwitterServer import run 
 
 users = {   
     '马斯克':'elonmusk',
@@ -42,22 +43,8 @@ def test_crawler():
             print('---------end------------\n\n\n')
 
 def test_with_temp_db():
-    db_opt = DbOpt()
-    db_opt.TABLE = 't_news_info_temp'
-
-    for key in users.keys():
-        craw = CrawlerTwit(users[key])
-        craw_data = craw.get_datas()
-
-        now = datetime.datetime.now()
-        for msg, time in craw_data:
-
-            # delta_time = (now-time).seconds
-            delta_time = now.timestamp()-time.timestamp()
-            # 超过5分钟不入库
-            if delta_time > 300:
-                continue 
-            db_opt.insert(key, msg)
+    TABLE = 't_news_info_temp'
+    run(TABLE)
 
 
 if __name__=="__main__":
@@ -78,6 +65,5 @@ if __name__=="__main__":
 
     # ----------------------- |
     # 用副表测试整个系统
-    # test_with_temp_db()
+    test_with_temp_db()
     # ----------------------——  |
-    pass 

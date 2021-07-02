@@ -11,12 +11,11 @@ users = {
         '灰度创始人':'BarrySilbert'
     }
 
-if __name__=="__main__":
+def run(TABLE=''):
     db_opt = DbOpt()
 
     # 设置正表还是副表
-    db_opt.TABLE = 't_news_info_temp'
-    # db_opt.TABLE = 't_news_info'
+    db_opt.TABLE = TABLE
     
     while True:
         for key in users.keys():
@@ -36,3 +35,8 @@ if __name__=="__main__":
 
         print("Waite 5 minutes")
         sleep(300)
+
+
+if __name__=="__main__":
+    TABLE='t_news_info'
+    run()
