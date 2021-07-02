@@ -29,7 +29,7 @@ class DbOpt(object):
 
         cursor=conn.cursor()
         
-        query = 'select * from ' + self.TABLE + ' where title="' + mesbody + '" and channel_id=9' +  ' order by  id  desc limit 1'
+        query = 'select * from ' + self.TABLE + ' where title="' + mesbody + '" and channel_id=9'
 
         res = []
         try:
