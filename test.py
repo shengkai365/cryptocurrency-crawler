@@ -51,7 +51,7 @@ def test_full_mesbody_1():
     # 方法一：
     tw = TwitterScraper()
     profile = tw.get_profile(name='justinsuntron')
-    id = profile.__dict__('id')
+    id = profile.__dict__['id']
 
     #tw.get_tweets(int(id), count=3)
     tweets = tw.get_tweets(id, count=3)
@@ -62,7 +62,7 @@ def test_full_mesbody_2():
     # 方法二：
     tw = TwitterScraper()
     profile = tw.get_profile(name='justinsuntron')
-    id = profile.__dict__('id')
+    id = profile.__dict__['id']
 
     tweets = tw.get_tweets(id, count=3)
     for line in tweets.contents:
