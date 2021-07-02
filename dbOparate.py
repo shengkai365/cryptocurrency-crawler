@@ -79,7 +79,7 @@ class DbOpt(object):
 
         try:
             if can_insert:
-
+                print("准备插入: %s" % mesbody)
                 #！！！！！！！！！！|
                 cursor.execute(sql, param)
                 #！！！！！！！！！！|
@@ -96,7 +96,7 @@ class DbOpt(object):
 
             else:
                 print('data exist: {}'.format(mesbody))
-                
+
             print('\n\n')
         except Exception as r:
             print("出错啦: %s" % r)
