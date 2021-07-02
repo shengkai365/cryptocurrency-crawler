@@ -13,8 +13,6 @@ users = {
 
 def run(TABLE=''):
     db_opt = DbOpt()
-
-    # 设置正表还是副表
     db_opt.TABLE = TABLE
     
     while True:
@@ -38,5 +36,7 @@ def run(TABLE=''):
 
 
 if __name__=="__main__":
+    
+    # 设置正表还是副表
     TABLE='t_news_info'
-    run()
+    run(TABLE)
