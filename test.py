@@ -26,7 +26,7 @@ def test_crawler():
                 print('now:',now)
                 print('time:',time)
                 delta_time = (now.timestamp()-time.timestamp())
-
+                print('delta_time', delta_time)
                 # 超过5分钟不入库
                 if delta_time > 300:
                     continue 
