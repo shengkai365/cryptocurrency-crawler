@@ -13,7 +13,6 @@ users = {
     '孙宇晨':'justinsuntron',
     '赵长鹏':'cz_binance',
     '灰度创始人':'BarrySilbert',
-    'TEST': 'shengkai666'
 }
 def test_db(key, msg):
     db_opt = DbOpt()
@@ -21,7 +20,7 @@ def test_db(key, msg):
     db_opt.insert(key, msg)
 
 
-def test_crawler():
+def test_crawler(TIME=300):
     for key in users.keys():
             print('---------start---------')
             craw = CrawlerTwit(users[key])
@@ -37,15 +36,15 @@ def test_crawler():
                 print('msg', msg)
                 
                 # 超过5分钟不入库
-                if delta_time > 300:
+                if delta_time > TIME:
                     continue 
             
                 print("尝试插入: %s"% msg)
             print('---------end------------\n\n\n')
 
-def test_with_temp_db():
+def test_with_temp_db(TIME):
     TABLE = 't_news_info_temp'
-    run(TABLE)
+    run(TABLE,TIME)
 
 def test_full_mesbody_1():
     # 方法一：
@@ -90,13 +89,14 @@ if __name__=="__main__":
 
     # ----------------------- |
     # 用副表测试整个系统
-    # test_with_temp_db()
+    # 10h 以内的推特
+    test_with_temp_db(36000)
     # ----------------------——  |
 
 
     # ----------------------- |
     # 测试mesbody的完整性
-    test_full_mesbody_1()
-    print('--------------分割线----------------')
-    test_full_mesbody_2()
+    # test_full_mesbody_1()
+    # print('--------------分割线----------------')
+    # test_full_mesbody_2()
     # ----------------------——  |

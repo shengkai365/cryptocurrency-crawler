@@ -11,7 +11,7 @@ users = {
         '灰度创始人':'BarrySilbert',
     }
 
-def run(TABLE=''):
+def run(TABLE='',TIME=300):
     db_opt = DbOpt()
     db_opt.TABLE = TABLE
     
@@ -26,7 +26,7 @@ def run(TABLE=''):
                 # delta_time = (now-time).seconds
                 delta_time = now.timestamp()-time.timestamp()
                 # 超过5分钟不入库
-                if delta_time > 300:
+                if delta_time > TIME:
                     continue 
                 db_opt.insert(key, msg)
 
