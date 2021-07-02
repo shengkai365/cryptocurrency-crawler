@@ -12,7 +12,7 @@ users = {
     '孙宇晨':'justinsuntron',
     '赵长鹏':'cz_binance',
     '灰度创始人':'BarrySilbert',
-    '我': 'shengkai666'
+    'TEST': 'shengkai666'
 }
 def test_db(key, msg):
     db_opt = DbOpt()
