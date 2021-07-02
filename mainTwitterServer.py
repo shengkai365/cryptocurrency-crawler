@@ -14,6 +14,10 @@ users = {
 if __name__=="__main__":
     db_opt = DbOpt()
 
+    # 设置正表还是副表
+    db_opt.TABLE = 't_news_info_temp'
+    # db_opt.TABLE = 't_news_info'
+    
     while True:
         for key in users.keys():
             craw = CrawlerTwit(users[key])

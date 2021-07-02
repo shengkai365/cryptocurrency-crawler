@@ -44,7 +44,7 @@ def test_crawler():
 def test_with_temp_db():
     db_opt = DbOpt()
     db_opt.TABLE = 't_news_info_temp'
-    
+
     for key in users.keys():
         craw = CrawlerTwit(users[key])
         craw_data = craw.get_datas()
@@ -78,5 +78,6 @@ if __name__=="__main__":
 
     # ----------------------- |
     # 用副表测试整个系统
-    test_with_temp_db()
+    # test_with_temp_db()
     # ----------------------——  |
+    pass 

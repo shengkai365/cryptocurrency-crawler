@@ -12,10 +12,9 @@ class CrawlerTwit(object):
     def initial_id(self):
         try:
             tw = TwitterScraper()
-            print("type:",type(self.name),self.name)
+            
             profile = tw.get_profile(name=self.name)
             self.id = profile.__dict__['id']
-            print("---initial id: %s" % self.id)
 
         except Exception as r:
             print("出错啦: %s" % r)
@@ -54,6 +53,8 @@ class CrawlerTwit(object):
             print(r.__traceback__.tb_frame.f_globals["__file__"])
             print(r.__traceback__.tb_lineno)
 
+        if len(data):
+            print("-----%s:---抓取Twitter成功-------\n"%self.name)
         return data
 
 
