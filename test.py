@@ -33,8 +33,8 @@ def test_crawler():
                 # 超过5分钟不入库
                 if delta_time > 300:
                     continue 
-                else:
-                    print("尝试插入: %s"% msg)
+            
+                print("尝试插入: %s"% msg)
 
 if __name__=="__main__":
 
