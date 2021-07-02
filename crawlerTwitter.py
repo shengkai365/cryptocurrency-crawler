@@ -38,12 +38,11 @@ class CrawlerTwit(object):
                 mesbody = twinfo.contents['text']
 
                 #str.find(sub_s): 找到了返回第一个位置索引，没找到返回-1
-                print(created_time)
-                print('原始:',mesbody)
+                
                 idx = mesbody.find('http')
                 if idx!=-1:
                     mesbody = mesbody[:idx]
-
+        
                 if mesbody:
                     data.append([mesbody, created_time])
                     

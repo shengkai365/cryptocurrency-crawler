@@ -88,13 +88,16 @@ class DbOpt(object):
                 # 如果是正表, 发送企业微信
                 if self.TABLE=='t_news_info':
                     send_msg(mesbody)
+                    print("----发送企业微信成功----")
                 #！！！！！！！！！！|
-                print('插入%s成功' % self.TABLE)
+                
+                print('插入{}成功: {}'.format(self.TABLE, mesbody))
                 print('插入北京时间:%s' % insertTimes)
 
             else:
-                print('data exist')
-
+                print('data exist: {}'.format(mesbody))
+                
+            print('\n\n')
         except Exception as r:
             print("出错啦: %s" % r)
             print(r.__traceback__.tb_frame.f_globals["__file__"])
