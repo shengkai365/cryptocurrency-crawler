@@ -23,10 +23,13 @@ def test_crawler():
 
             now = datetime.datetime.now()
             for msg,time in craw_data:
+                print('------------------')
                 print('now:',now)
                 print('time:',time)
                 delta_time = (now.timestamp()-time.timestamp())
                 print('delta_time', delta_time)
+                print('msg', msg)
+                print('---------------------')
                 # 超过5分钟不入库
                 if delta_time > 300:
                     continue 
