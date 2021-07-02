@@ -5,6 +5,7 @@ from dbOparate import DbOpt
 from crawlerTwitter import CrawlerTwit
 from time import sleep
 from mainTwitterServer import run 
+from pytwitterscraper import TwitterScraper
 
 users = {   
     '马斯克':'elonmusk',
@@ -46,6 +47,30 @@ def test_with_temp_db():
     TABLE = 't_news_info_temp'
     run(TABLE)
 
+def test_full_mesbody_1():
+    # 方法一：
+    tw = TwitterScraper()
+    profile = tw.get_profile(name='justinsuntron')
+    id = profile.__dict__('id')
+
+    #tw.get_tweets(int(id), count=3)
+    tweets = tw.get_tweets(id, count=3)
+    for line in tweets.contents:
+        print(line['text'])
+
+def test_full_mesbody_2():
+    # 方法二：
+    tw = TwitterScraper()
+    profile = tw.get_profile(name='justinsuntron')
+    id = profile.__dict__('id')
+
+    tweets = tw.get_tweets(id, count=3)
+    for line in tweets.contents:
+        
+        twinfo = tw.get_tweetinfo(line['id'])
+        print(twinfo.contents['text'])
+
+
 
 if __name__=="__main__":
 
@@ -65,5 +90,13 @@ if __name__=="__main__":
 
     # ----------------------- |
     # 用副表测试整个系统
-    test_with_temp_db()
+    # test_with_temp_db()
+    # ----------------------——  |
+
+
+    # ----------------------- |
+    # 测试mesbody的完整性
+    test_full_mesbody_1()
+    print('--------------分割线----------------')
+    test_full_mesbody_2()
     # ----------------------——  |
