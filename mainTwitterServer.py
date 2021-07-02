@@ -11,7 +11,7 @@ users = {
         '灰度创始人':'BarrySilbert',
     }
 
-def run(TABLE='',TIME=300):
+def run(TABLE='',TIME=305):
     db_opt = DbOpt()
     db_opt.TABLE = TABLE
     

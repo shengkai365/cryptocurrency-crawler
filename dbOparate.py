@@ -79,7 +79,7 @@ class DbOpt(object):
 
         try:
             if can_insert:
-                print("准备插入: %s" % mesbody)
+                print("准备插入: %s" % mesbody[:20])
                 #！！！！！！！！！！|
                 cursor.execute(sql, param)
                 #！！！！！！！！！！|
