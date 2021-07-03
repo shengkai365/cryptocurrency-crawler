@@ -9,37 +9,16 @@ import json
 '''
 网页抓取操作类
 '''
-#代理服务器
-proxyHost = "120.12.70.105"
-proxyPort = "4220"
-
-# proxyMeta = "http://%(host)s:%(port)s" % {
-#     "host" : proxyHost,
-#     "port" : proxyPort,
-# }
-
-#pip install -U requests[socks]  socks5 
-proxyMeta = "socks5://%(host)s:%(port)s" % {
-
-    "host" : proxyHost,
-
-    "port" : proxyPort,
-
-}
-
-proxies = {
-    "http"  : proxyMeta,
-    "https"  : proxyMeta
-}
 
 class PullData(object):
 
     def __init__(self):
+        self.headers = None 
         print("init---PullData---")  # never prints
 
     def getHTMLText(self, url):
         try:
-            r = requests.get(url, timeout=30,proxies=proxies)
+            r = requests.get(url, timeout=30)
             r.raise_for_status()  # 如果状态不是200，引发HTTPError异常
             r.encoding = r.apparent_encoding
             return r.text
@@ -54,7 +33,7 @@ class PullData(object):
         array = []
         try:
             session = HTMLSession()
-            r1 = session.get(url1,proxies=proxies)
+            r1 = session.get(url1)
             for i in range(20):
                 title = r1.html.find(
                     '#__layout > section > div > div.page > div > div.layout-box > div.main-content > dl > dd:nth-child({}) > div.link-dealpair > a'.format(
@@ -90,7 +69,7 @@ class PullData(object):
         array = []
         try:
             session = HTMLSession()
-            r2 = session.get(url2,proxies=proxies)
+            r2 = session.get(url2)
             for i in range(20):
                 title = r2.html.xpath(
                     '//*[@id="__APP"]/div/div/main/div/div[3]/div[1]/div[2]/div[2]/div/a[{}]'.format(i + 1), first=True)
@@ -148,7 +127,7 @@ class PullData(object):
         array = []
         try:
             session = HTMLSession()
-            r4 = session.get(url4,proxies = proxies)
+            r4 = session.get(url4)
             for i in range(20):
                 title = r4.html.find(
                     '#kuaixun > div.nno > div.fl > div > div.home-container > div > div.content-wrap > ul > li:nth-child({}) > div > a > h3'.format(
@@ -268,8 +247,47 @@ class PullData(object):
         return array
 
 
+    # 币世界-名人
+    def getPullBishijieCelebrity(self):
+        url_dic = {
+            '忠本聪': 'https://i.bishijie.com/home/310341176/dynamic',
+            '陈楚初': 'https://i.bishijie.com/home/825196401/dynamic',
+            '于集鑫': 'https://i.bishijie.com/home/224934581/dynamic',
+            '紫狮财经': 'https://i.bishijie.com/home/810652218/dynamic',
+            '丁佳永': 'https://i.bishijie.com/home/624941048/dynamic'
+        }
 
-# S = PullData()
-# array = S.getPullBiAnData('$')
-# # array = S.getPullOEXData("#")
-# print(array)
+
+
+
+        url = url_dic['忠本聪']
+        session = HTMLSession()
+        r = session.get(url)
+        text = r.html.full_text
+        print(text)
+
+
+        # #info_array[0]: name, title, mesbody, url
+        # info_array = []
+        # for name in url_dic.keys():
+        #     try:
+        #         url = url_dic[name]
+        #         session = HTMLSession()
+        #         r = session.get(url, headers = self.headers)
+
+        #         for i in range(10):
+        #             pass 
+
+        #     except Exception as r:
+        #         print('未知错误 %s' % r)
+        #         print(r.__traceback__.tb_frame.f_globals["__file__"])
+        #         print(r.__traceback__.tb_lineno)
+
+
+        
+
+
+
+
+S = PullData()
+S.getPullBishijieCelebrity()
