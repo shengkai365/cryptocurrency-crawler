@@ -14,6 +14,7 @@ users = {
     '赵长鹏':'cz_binance',
     '灰度创始人':'BarrySilbert',
 }
+
 def test_db(key, msg):
     db_opt = DbOpt()
     db_opt.TABLE = 't_news_info_temp'
@@ -46,6 +47,7 @@ def test_with_temp_db(TIME):
     TABLE = 't_news_info_temp'
     run(TABLE,TIME)
 
+
 def test_full_mesbody_1():
     # 方法一：
     tw = TwitterScraper()
@@ -56,6 +58,7 @@ def test_full_mesbody_1():
     tweets = tw.get_tweets(id, count=3)
     for line in tweets.contents:
         print(line['text'])
+
 
 def test_full_mesbody_2():
     # 方法二：

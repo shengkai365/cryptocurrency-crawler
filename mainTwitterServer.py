@@ -9,6 +9,9 @@ users = {
         '孙宇晨':'justinsuntron',
         '赵长鹏':'cz_binance',
         '灰度创始人':'BarrySilbert',
+        '火币': 'HuobiGlobal',
+        '灰度资本': 'Grayscale',
+        '欧易': 'OKEx'
     }
 
 def run(TABLE='',TIME=305):
