@@ -5,7 +5,7 @@ from requests_html import HTMLSession
 from bs4 import BeautifulSoup
 import datetime
 import json
-
+import re 
 # from exceptionMessage import ExceptionMessage
 
 '''
@@ -31,6 +31,10 @@ class PullData(object):
             print(r.__traceback__.tb_frame.f_globals["__file__"])
             print(r.__traceback__.tb_lineno)
             
+    def getSessionHTML(self, url):
+        session = HTMLSession()
+        r1 = session.get(url,headers=self.headers)
+        return r1
 
     def getPullHuoBiData(self, oldTitle):
 
@@ -299,5 +303,53 @@ class PullData(object):
                 print(r.__traceback__.tb_lineno)
 
         return infos_array
+
+
+    # 芝麻开门-gateio
+    def getPullGateio(self):
+        
+        #infos_array[0]: title, mesbody, url, created_time
+        infos_array = []
+        for i in range(5):
+            start_url = 'https://www.gateio.ch/cn/poll'
+
+            try:
+                r1 = self.getSessionHTML(start_url)
+                start_url_xpath = '//*[@id="pollListUl"]/li[{}]/a'.format(i+1)
+                start_url_elem = r1.html.xpath(start_url_xpath, first=True)
+                
+
+                second_url = start_url[:-5] + start_url_elem.attrs['href']
+                r2 = self.getSessionHTML(second_url)
+                second_url_xpath = '//*[@id="pollBannerUl"]/li/div[1]/div[4]/a'
+                second_url_elem = r2.html.xpath(second_url_xpath, first=True)
+                
+                final_url = second_url_elem.attrs['href']
+                r3 = self.getSessionHTML(final_url)
+
+                
+                title_elem = r3.html.xpath('/html/body/div/div[1]/div[3]/div/div[1]/h1',first=True)
+                title = title_elem.full_text
+                
+                mesbody_elem = r3.html.xpath('/html/body/div/div[1]/div[3]/div/div[3]',first=True)
+                patt = r'介绍([\s\S]*)关于Gate.io投票上币规则.'
+                mesbody = re.findall(patt, mesbody_elem.full_text)[0].strip()
+
+                url = final_url 
+                created_time_elem = r3.html.xpath('/html/body/div/div[1]/div[3]/div/div[2]/span',first=True)
+                created_time = created_time_elem.full_text 
+            
+                infos_array.append([title, mesbody, url, created_time])
+
+            except Exception as r:
+                print('产生异常 %s' % r)
+                print(r.__traceback__.tb_frame.f_globals["__file__"])
+                print(r.__traceback__.tb_lineno)
+        for line in infos_array:
+            print(line)
+        return infos_array 
+
+S = PullData()
+S.getPullGateio()
 
 
