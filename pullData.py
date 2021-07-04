@@ -1,9 +1,11 @@
 import datetime
+import time 
 import requests
 from requests_html import HTMLSession
 from bs4 import BeautifulSoup
 import datetime
 import json
+
 # from exceptionMessage import ExceptionMessage
 
 '''
@@ -13,18 +15,22 @@ import json
 class PullData(object):
 
     def __init__(self):
-        self.headers = None 
+        self.headers = headers={
+		        'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/537.36 LBBROWSER'
+		    }
         print("init---PullData---")  # never prints
-
+        
     def getHTMLText(self, url):
         try:
-            r = requests.get(url, timeout=30)
+            r = requests.get(url, timeout=30, headers= self.headers)
             r.raise_for_status()  # 如果状态不是200，引发HTTPError异常
             r.encoding = r.apparent_encoding
             return r.text
-        except:
-            print(url + '产生异常')
-            return "产生异常"
+        except Exception as r:
+            print('产生异常 %s' % r)
+            print(r.__traceback__.tb_frame.f_globals["__file__"])
+            print(r.__traceback__.tb_lineno)
+            
 
     def getPullHuoBiData(self, oldTitle):
 
@@ -33,7 +39,7 @@ class PullData(object):
         array = []
         try:
             session = HTMLSession()
-            r1 = session.get(url1)
+            r1 = session.get(url1,headers=self.headers)
             for i in range(20):
                 title = r1.html.find(
                     '#__layout > section > div > div.page > div > div.layout-box > div.main-content > dl > dd:nth-child({}) > div.link-dealpair > a'.format(
@@ -69,7 +75,7 @@ class PullData(object):
         array = []
         try:
             session = HTMLSession()
-            r2 = session.get(url2)
+            r2 = session.get(url2,headers=self.headers)
             for i in range(20):
                 title = r2.html.xpath(
                     '//*[@id="__APP"]/div/div/main/div/div[3]/div[1]/div[2]/div[2]/div/a[{}]'.format(i + 1), first=True)
@@ -127,7 +133,7 @@ class PullData(object):
         array = []
         try:
             session = HTMLSession()
-            r4 = session.get(url4)
+            r4 = session.get(url4,headers=self.headers)
             for i in range(20):
                 title = r4.html.find(
                     '#kuaixun > div.nno > div.fl > div > div.home-container > div > div.content-wrap > ul > li:nth-child({}) > div > a > h3'.format(
@@ -249,45 +255,49 @@ class PullData(object):
 
     # 币世界-名人
     def getPullBishijieCelebrity(self):
+        # # 原页面网址
+        # url_dic = {
+        #     '忠本聪': 'https://i.bishijie.com/home/310341176/dynamic',
+        #     '陈楚初': 'https://i.bishijie.com/home/825196401/dynamic',
+        #     '于集鑫': 'https://i.bishijie.com/home/224934581/dynamic',
+        #     '紫狮财经': 'https://i.bishijie.com/home/810652218/dynamic',
+        #     '丁佳永': 'https://i.bishijie.com/home/624941048/dynamic'
+        # }
+       
+        # url中设置每次读取10条消息
         url_dic = {
-            '忠本聪': 'https://i.bishijie.com/home/310341176/dynamic',
-            '陈楚初': 'https://i.bishijie.com/home/825196401/dynamic',
-            '于集鑫': 'https://i.bishijie.com/home/224934581/dynamic',
-            '紫狮财经': 'https://i.bishijie.com/home/810652218/dynamic',
-            '丁佳永': 'https://i.bishijie.com/home/624941048/dynamic'
+            '忠本聪': 'https://iapi.bishijie.com/project/articleList?homePageUid=1034117&token=&lastId=&size=10',
+            '陈楚初': 'https://iapi.bishijie.com/project/articleList?homePageUid=2519640&token=&lastId=&size=10',
+            '于集鑫': 'https://iapi.bishijie.com/project/articleList?homePageUid=2493458&token=&lastId=&size=10',
+            '紫狮财经': 'https://iapi.bishijie.com/project/articleList?homePageUid=1065221&token=&lastId=&size=10',
+            '丁佳永': 'https://iapi.bishijie.com/project/articleList?homePageUid=2494104&token=&lastId=&size=10'
         }
 
+        # infos_array[0]: name, mesbody, web_url , create_time
+        infos_array = []
+        for name in url_dic.keys():
+            request_url = url_dic[name]
+            try:
+                text = self.getHTMLText(request_url)
+                dic = json.loads(text)
+                for item in dic['data']['listData']:
+                    mesbody = item['content']
+                    web_url = item['web_url']
+
+                    create_time_dt = datetime.datetime.fromtimestamp(int(item['create_time']))
+                    create_time = datetime.datetime.strftime(create_time_dt, '%Y-%m-%d %H:%M:%S')
+                    
+
+                    # 如果是长文,json中content解析出来的是：'我发表了一篇文章', 那么跳过。
+                    if mesbody == '我发表了一篇文章':
+                        continue 
+                    infos_array.append([name, mesbody, web_url, create_time])
+
+            except Exception as r:
+                print('未知错误 %s' % r)
+                print(r.__traceback__.tb_frame.f_globals["__file__"])
+                print(r.__traceback__.tb_lineno)
+
+        return infos_array
 
 
-
-        url = url_dic['忠本聪']
-        session = HTMLSession()
-        r = session.get(url)
-        text = r.html.full_text
-        print(text)
-
-
-        # #info_array[0]: name, title, mesbody, url
-        # info_array = []
-        # for name in url_dic.keys():
-        #     try:
-        #         url = url_dic[name]
-        #         session = HTMLSession()
-        #         r = session.get(url, headers = self.headers)
-
-        #         for i in range(10):
-        #             pass 
-
-        #     except Exception as r:
-        #         print('未知错误 %s' % r)
-        #         print(r.__traceback__.tb_frame.f_globals["__file__"])
-        #         print(r.__traceback__.tb_lineno)
-
-
-        
-
-
-
-
-S = PullData()
-S.getPullBishijieCelebrity()
