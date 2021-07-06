@@ -72,36 +72,6 @@ class PullData(object):
 
         return array
 
-    def getPullBiAnData(self, oldTitle):
-
-        insertTimes = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        url2 = 'https://www.binancezh.co/zh-CN/support/announcement/c-48?navId=48&t=' + insertTimes
-        array = []
-        try:
-            session = HTMLSession()
-            r2 = session.get(url2,headers=self.headers)
-            for i in range(20):
-                title = r2.html.xpath(
-                    '//*[@id="__APP"]/div/div/main/div/div[3]/div[1]/div[2]/div[2]/div/a[{}]'.format(i + 1), first=True)
-                if title is None:
-                    continue
-                else:
-                    tempTile = title.text.replace(',', '')
-                    if oldTitle != '' and oldTitle in tempTile:
-                        break
-
-                    line = ('1', '平台上新', tempTile, 'https://www.binancezh.co/' + title.attrs['href'],
-                            datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'), '', '3','币安', 'N', '0')
-                    array.append(line)
-
-        except Exception as r:
-            print('未知错误 %s' % r)
-            print(r.__traceback__.tb_frame.f_globals["__file__"])
-            print(r.__traceback__.tb_lineno)
-            ExceptionMessage.sendErrorMessage('getPullBiAnData--币安抓取异常')
-
-        return array
-
     def getPullOEXData(self, oldTitle):
         array = []
         insertTimes = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -165,7 +135,7 @@ class PullData(object):
             print('未知错误 %s' % r)
             print(r.__traceback__.tb_frame.f_globals["__file__"])
             print(r.__traceback__.tb_lineno)
-            ExceptionMessage.sendErrorMessage('getPullBiShiJieData--币世界抓取异常')
+            # ExceptionMessage.sendErrorMessage('getPullBiShiJieData--币世界抓取异常')
 
         return array
         # 非小号
@@ -349,7 +319,35 @@ class PullData(object):
             print(line)
         return infos_array 
 
-S = PullData()
-S.getPullGateio()
+    def getPullBiAnData(self, oldTitle):
 
+        insertTimes = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        url2 = 'https://www.binancezh.co/zh-CN/support/announcement/c-48?navId=48&t=' + insertTimes
+        array = []
+        try:
+            session = HTMLSession()
+            r2 = session.get(url2,headers=self.headers)
+            for i in range(20):
+                title = r2.html.xpath(
+                    '//*[@id="__APP"]/div/div/main/div/div[3]/div[1]/div[2]/div[2]/div/a[{}]'.format(i + 1), first=True)
+                if title is None:
+                    continue
+                else:
+                    tempTile = title.text.replace(',', '')
+                    if oldTitle != '' and oldTitle in tempTile:
+                        break
+
+                    line = ('1', '平台上新', tempTile, 'https://www.binancezh.co/' + title.attrs['href'],
+                            datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'), '', '3','币安', 'N', '0')
+                    array.append(line)
+
+        except Exception as r:
+            print('未知错误 %s' % r)
+            print(r.__traceback__.tb_frame.f_globals["__file__"])
+            print(r.__traceback__.tb_lineno)
+            # ExceptionMessage.sendErrorMessage('getPullBiAnData--币安抓取异常')
+
+        return array
+        
+    
 

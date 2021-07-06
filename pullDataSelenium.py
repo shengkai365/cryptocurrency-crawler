@@ -10,12 +10,8 @@ from selenium.webdriver.chrome.options import Options
 class PullData(object):
 
     def __init__(self):
-        self.headers = {
-            'user-agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36'
-        }
-        print("init---PullData---")  # never prints
+        print("init---PullData---")  
    
-
     # 币世界-政策
     def getPullBishijiePolicy(self):
         
@@ -85,7 +81,38 @@ class PullData(object):
                 print('selenium.common.exceptions.NoSuchElementException')
         return array 
 
-   
+    # 币世界-社区
+    def getPullBishijieCommunity(self):
+        url = 'https://www.bishijie.com/community/new'
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--disable-gpu')
+
+        browser = webdriver.Chrome(executable_path=r'C:\Program Files\chromedriver.exe', chrome_options=chrome_options)
+        browser.get(url)
+        sleep(2)
+
+        name_template = '//*[@id="communityNew"]/div/div[1]/div[2]/ul/li[{}]/div[1]/div[2]/div[1]/div[1]/div[1]'
+        mesbody_template = '//*[@id="communityNew"]/div/div[1]/div[2]/ul/li[{}]/div[1]/div[2]/div[2]/div/div/span/span[1]'
+        url_template = '//*[@id="communityNew"]/div/div[1]/div[2]/ul/li[{}]/div[1]/div[2]/div[2]/div/div/span/span[2]/a'
+
+        array = []
+
+        for i in range(10):
+            try:
+                title = browser.find_element_by_xpath(name_template.format(i+1)).text
+                mesbody = browser.find_element_by_xpath(mesbody_template.format(i+1)).text
+                url = browser.find_element_by_xpath(url_template.format(i+1)).get_attribute('href')
+                line = [title, mesbody, url]
+                array.append(line)
+                sleep(0.1)
+            except Exception as r:
+                print('未知错误 %s' % r)
+                print(r.__traceback__.tb_frame.f_globals["__file__"])
+                print(r.__traceback__.tb_lineno)
+        return array 
 
 S = PullData()
-S.getPullBishijiePolicy()
+array = S.getPullBishijieCommunity()
+for line in array:
+    print(line)
