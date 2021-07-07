@@ -13,8 +13,8 @@ users = {
         '灰度资本': 'Grayscale',
         '欧易': 'OKEx',
         'Butter':'butterswap',
-        'Minidoge':'MiniDOGEToken',
-        'Babydoge':'BabyDogeCoin'
+        'MiniDoge':'MiniDOGEToken',
+        'BabyDoge':'BabyDogeCoin'
     }
 
 def run(TABLE='',TIME=305):
