@@ -79,10 +79,10 @@ class DbOpt(object):
         if key=='Butter':
             channel = key 
             channel_id = 12 
-        if key=='Minidoge':
+        if key=='MiniDoge':
             channel = key 
             channel_id = 13
-        if key=='Babydoge':
+        if key=='BabyDoge':
             channel = key 
             channel_id = 14
 
