@@ -67,13 +67,31 @@ class DbOpt(object):
         # sql语句中，用%s做占位符，参数用一个元组
         # channel_id=2，channel=名人言论 ，level=2  ，is_keywords=N ,keywords_id=0,status=0，
         
-        sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id) values(9,'实时推特',%s,NULL,%s,NULL,2,%s,'N',0)"
+        # sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id) values(9,'实时推特',%s,NULL,%s,NULL,2,%s,'N',0)"
+        sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id) values(%s,%s,%s,NULL,%s,NULL,2,%s,'N',0)"
+
+
+        channel_id = 9
+        channel = '实时推特'
+        if key=='马斯克':
+            channel = key
+            channel_id = 11
+        if key=='Butter':
+            channel = key 
+            channel_id = 12 
+        if key=='Minidoge':
+            channel = key 
+            channel_id = 13
+        if key=='Babydoge':
+            channel = key 
+            channel_id = 14
+
 
         # times
         insertTimes = (datetime.datetime.now()+datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
 
         mesbody = key + '：'+ msg
-        param=(mesbody, insertTimes, 'Twitter-{}'.format(key))
+        param=(channel_id, channel, mesbody, insertTimes, 'Twitter-{}'.format(key))
         
         can_insert = self.querySql(mesbody)
 

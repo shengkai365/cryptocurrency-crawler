@@ -79,8 +79,8 @@ if __name__=="__main__":
     # ----------------------- |
     # 测试数据插入是否正常
     # 注释 send_msg!!!!!!!!!!
-    # key = ''
-    # msg = ''
+    # key = '马斯克'
+    # msg = 'Congrats Tesla Team on over 200,000 car built &amp; delivered in Q2'
     # test_db(key, msg)
     # ----------------------——  |
 
