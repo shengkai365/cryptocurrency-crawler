@@ -11,7 +11,10 @@ users = {
         '灰度创始人':'BarrySilbert',
         '火币': 'HuobiGlobal',
         '灰度资本': 'Grayscale',
-        '欧易': 'OKEx'
+        '欧易': 'OKEx',
+        'butter官方推特':'butterswap',
+        'minidoge官方推特':'MiniDOGEToken',
+        'babydoge官方推特':'BabyDogeCoin'
     }
 
 def run(TABLE='',TIME=305):

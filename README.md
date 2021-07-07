@@ -4,6 +4,9 @@
 
 | 推特名账号           | 英文账号                   |
 | -------------------- | -------------------------- |
+| butter官方推特       | butterswap                 |
+| minidoge官方推特     | MiniDOGEToken              |
+| babydoge官方推特     | BabyDogeCoin               |
 | Coinbase Pro官方推特 | Coinbase Pro@CoinbasePro   |
 | 孙宇晨               | Justin Sun@justinsuntron   |
 | 赵长鹏               | CZ Binance@cz_binance      |
