@@ -1,9 +1,10 @@
 import requests 
-def send_msg(mesbody):
+def send_msg(mesbody,channel):
     try:
         url = "https://bpj-s.junshangxun.com/sendmessage"
         values = {
-            "title": mesbody 
+            "title": mesbody,
+            "channel" :channel
         }
         a = requests.post(url, json=values)
         print(a)

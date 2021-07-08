@@ -235,7 +235,10 @@ class PullData(object):
         #     '陈楚初': 'https://i.bishijie.com/home/825196401/dynamic',
         #     '于集鑫': 'https://i.bishijie.com/home/224934581/dynamic',
         #     '紫狮财经': 'https://i.bishijie.com/home/810652218/dynamic',
-        #     '丁佳永': 'https://i.bishijie.com/home/624941048/dynamic'
+        #     '丁佳永': 'https://i.bishijie.com/home/624941048/dynamic',
+        #     '海宇谈币': 'https://i.bishijie.com/home/137715106/dynamic',
+        #     '阿星论币': 'https://i.bishijie.com/home/111835487/dynamic',
+        #     '时时解币': 'https://i.bishijie.com/home/124119401/dynamic'
         # }
        
         # url中设置每次读取10条消息
@@ -244,7 +247,10 @@ class PullData(object):
             '陈楚初': 'https://iapi.bishijie.com/project/articleList?homePageUid=2519640&token=&lastId=&size=10',
             '于集鑫': 'https://iapi.bishijie.com/project/articleList?homePageUid=2493458&token=&lastId=&size=10',
             '紫狮财经': 'https://iapi.bishijie.com/project/articleList?homePageUid=1065221&token=&lastId=&size=10',
-            '丁佳永': 'https://iapi.bishijie.com/project/articleList?homePageUid=2494104&token=&lastId=&size=10'
+            '丁佳永': 'https://iapi.bishijie.com/project/articleList?homePageUid=2494104&token=&lastId=&size=10',
+            '海宇谈币': 'https://iapi.bishijie.com/project/articleList?homePageUid=3771510&token=&lastId=&size=10',
+            '阿星论币': 'https://iapi.bishijie.com/project/articleList?homePageUid=1183548&token=&lastId=&size=10',
+            '时时解币': 'https://iapi.bishijie.com/project/articleList?homePageUid=2411940&token=&lastId=&size=10'
         }
 
         # infos_array[0]: name, mesbody, web_url , create_time
@@ -262,9 +268,21 @@ class PullData(object):
                     create_time = datetime.datetime.strftime(create_time_dt, '%Y-%m-%d %H:%M:%S')
                     
 
+                    # 过滤祝福语
+                    if name=='海宇谈币' and ('大饼' not in mesbody and '以太' not in mesbody):
+                        print('过滤了：%s'%mesbody)
+                        continue 
+                    
+                    # 过滤长文
                     # 如果是长文,json中content解析出来的是：'我发表了一篇文章', 那么跳过。
                     if mesbody == '我发表了一篇文章':
                         continue 
+                    
+                    # 去掉过多的换行
+                    mes_list = [item.strip() for item in mesbody.split('\n') if item.strip()]
+                    mesbody = '\n'.join(mes_list)
+                
+
                     infos_array.append([name, mesbody, web_url, create_time])
 
             except Exception as r:
@@ -349,5 +367,9 @@ class PullData(object):
 
         return array
         
-    
+S = PullData()
+array = S.getPullBishijieCelebrity()
+for line in array:
+    print(line)
+
 
