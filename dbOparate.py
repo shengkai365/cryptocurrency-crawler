@@ -73,24 +73,25 @@ class DbOpt(object):
 
         channel_id = 9
         channel = '实时推特'
-        if key=='马斯克':
-            channel = key
-            channel_id = 11
-        if key=='Butter':
-            channel = key 
-            channel_id = 12 
-        if key=='MiniDoge':
-            channel = key 
-            channel_id = 13
-        if key=='BabyDoge':
-            channel = key 
-            channel_id = 14
+
+        # if key=='马斯克':
+        #     channel = key
+        #     channel_id = 11
+        # if key=='Butter':
+        #     channel = key 
+        #     channel_id = 12 
+        # if key=='MiniDoge':
+        #     channel = key 
+        #     channel_id = 13
+        # if key=='BabyDoge':
+        #     channel = key 
+        #     channel_id = 14
 
 
         # times
         insertTimes = (datetime.datetime.now()+datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
 
-        mesbody = key + '：'+ msg
+        mesbody = '推特|' + key + '：'+ msg
         param=(channel_id, channel, mesbody, insertTimes, 'Twitter-{}'.format(key))
         
         can_insert = self.querySql(mesbody)
