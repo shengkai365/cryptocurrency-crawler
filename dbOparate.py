@@ -91,7 +91,7 @@ class DbOpt(object):
         # times
         insertTimes = (datetime.datetime.now()+datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
 
-        mesbody = '推特|' + key + '：'+ msg
+        mesbody = ' 推特 | ' + key + '：'+ msg
         param=(channel_id, channel, mesbody, insertTimes, 'Twitter-{}'.format(key))
         
         can_insert = self.querySql(mesbody)
