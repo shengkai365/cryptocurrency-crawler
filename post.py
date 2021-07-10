@@ -13,3 +13,6 @@ def send_msg(mesbody,channel):
         print("出错啦: %s" % r)
         print(r.__traceback__.tb_frame.f_globals["__file__"])
         print(r.__traceback__.tb_lineno)
+        
+        # 加个递归确保发送成功
+        send_msg(mesbody, channel)
