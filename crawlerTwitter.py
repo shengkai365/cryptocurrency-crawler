@@ -51,8 +51,6 @@ class CrawlerTwit(object):
             print(r.__traceback__.tb_frame.f_globals["__file__"])
             print(r.__traceback__.tb_lineno)
 
-        if len(data):
-            print("-----%s:---抓取Twitter成功-------\n"%self.name)
         return data
 
 
