@@ -6,6 +6,7 @@ from crawlerTwitter import CrawlerTwit
 from time import sleep
 from mainTwitterServer import run 
 from pytwitterscraper import TwitterScraper
+from post import send_msg 
 
 users = {   
     '马斯克':'elonmusk',
@@ -72,7 +73,8 @@ def test_full_mesbody_2():
         twinfo = tw.get_tweetinfo(line['id'])
         print(twinfo.contents['text'])
 
-
+def test_post(mesbody, channel):
+    send_msg(mesbody, channel)
 
 if __name__=="__main__":
 
@@ -92,8 +94,8 @@ if __name__=="__main__":
 
     # ----------------------- |
     # 用副表测试整个系统
-    # 10h 以内的推特
-    test_with_temp_db(36000)
+    # 5h 以内的推特
+    # test_with_temp_db(18000)
     # ----------------------——  |
 
 
@@ -102,4 +104,11 @@ if __name__=="__main__":
     # test_full_mesbody_1()
     # print('--------------分割线----------------')
     # test_full_mesbody_2()
+    # ----------------------——  |
+
+    # ----------------------- |
+    # 测试post是否出错
+    mesbody = '推特 | BabyDoge：If this gets retweeted by @ElonMusk or @cz_binance We will donate $100,000.00 to a dog rescue of their choice! #BabyDoge 🐶🍼#SaveDogs'
+    channel =  '实时推特'
+    test_post(mesbody, channel)
     # ----------------------——  |
