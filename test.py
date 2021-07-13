@@ -95,7 +95,7 @@ if __name__=="__main__":
     # ----------------------- |
     # 用副表测试整个系统
     # 5h 以内的推特
-    # test_with_temp_db(18000)
+    test_with_temp_db(18000)
     # ----------------------——  |
 
 
@@ -108,7 +108,7 @@ if __name__=="__main__":
 
     # ----------------------- |
     # 测试post是否出错
-    mesbody = '推特 | BabyDoge：If this gets retweeted by @ElonMusk or @cz_binance We will donate $100,000.00 to a dog rescue of their choice! #BabyDoge 🐶🍼#SaveDogs'
-    channel =  '实时推特'
-    test_post(mesbody, channel)
+    # mesbody = '推特 | BabyDoge：If this gets retweeted by @ElonMusk or @cz_binance We will donate $100,000.00 to a dog rescue of their choice! #BabyDoge 🐶🍼#SaveDogs'
+    # channel =  '实时推特'
+    # test_post(mesbody, channel)
     # ----------------------——  |

@@ -71,21 +71,19 @@ class DbOpt(object):
         sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id) values(%s,%s,%s,NULL,%s,NULL,2,%s,'N',0)"
 
 
-        channel_id = 9
-        channel = '实时推特'
+        channel_id = -1
+        channel = key 
 
-        # if key=='马斯克':
-        #     channel = key
-        #     channel_id = 11
-        # if key=='Butter':
-        #     channel = key 
-        #     channel_id = 12 
-        # if key=='MiniDoge':
-        #     channel = key 
-        #     channel_id = 13
-        # if key=='BabyDoge':
-        #     channel = key 
-        #     channel_id = 14
+        # 项目推特
+        if key in {'Butter','MiniDoge','BabyDoge'}:
+            channel_id = 16
+        # 名人推特
+        if key in {'孙宇晨','赵长鹏','马斯克','灰度创始人'}:
+            channel_id = 2
+        # 平台推特
+        if key in {'火币','灰度资本','欧易','Coinbase'}:
+            channel_id = 9
+       
 
 
         # times
