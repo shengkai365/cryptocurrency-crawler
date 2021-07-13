@@ -72,17 +72,19 @@ class DbOpt(object):
 
 
         channel_id = -1
-        channel = key 
+        channel = ' '
 
-        # 项目推特
         if key in {'Butter','MiniDoge','BabyDoge'}:
             channel_id = 16
-        # 名人推特
+            channel = '项目推特'
+        
         if key in {'孙宇晨','赵长鹏','马斯克','灰度创始人'}:
             channel_id = 2
-        # 平台推特
+            channel = '名人推特'
+        
         if key in {'火币','灰度资本','欧易','Coinbase'}:
             channel_id = 9
+            channel = '平台推特'
        
 
 
