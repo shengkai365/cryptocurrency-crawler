@@ -18,7 +18,7 @@ class DbOpt(object):
         }
 
     # 查看数据库中 mesbody 是否存在, 不存在返回True(可插入), 反之亦然.
-    def querySql(self, mesbody):
+    def querySql(self, mesbody, channel_id):
 
         conn = pymysql.connect(
                 host=self.config["host"],
@@ -29,7 +29,7 @@ class DbOpt(object):
 
         cursor=conn.cursor()
         
-        query = 'select * from ' + self.TABLE + ' where title="' + mesbody + '" and channel_id=9'
+        query = 'select * from ' + self.TABLE + ' where title="' + mesbody + '" and channel_id={}'.format(channel_id)
 
         res = []
         try:
@@ -94,7 +94,7 @@ class DbOpt(object):
         mesbody = '推特 | ' + key + '：'+ msg
         param=(channel_id, channel, mesbody, insertTimes, 'Twitter-{}'.format(key))
         
-        can_insert = self.querySql(mesbody)
+        can_insert = self.querySql(mesbody, channel_id)
 
         try:
             if can_insert:
