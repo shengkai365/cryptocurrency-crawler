@@ -30,13 +30,25 @@ class CrawlerTwit(object):
         # 获取前10条推特
         try:
             tw = TwitterScraper()
-            tweets = tw.get_tweets(self.id, count=50)
+            tweets = tw.get_tweets(self.id, count=5)
             
             for line in tweets.contents:
                 twinfo = tw.get_tweetinfo(line['id'])
                 created_time = twinfo.contents['created_at']
                 mesbody = twinfo.contents['text']
-                print(twinfo.contents['media'])
+                
+                media = twinfo.contents['media']
+                # media格式如下：
+                # [{'url': 'https://t.co/ITY6jyeDLM', 'type': 'photo', 
+                # 'image_url': 'https://pbs.twimg.com/media/E5wIZGDXEAEfCGh.jpg', 
+                # 'twitter_url': 'https://twitter.com/elonmusk/status/1413013632464662528/photo/1'}]
+
+                image_urls = []
+                
+                for i in range(len(media)):
+                    image_urls.append(media[i]['image_url'])
+
+
                 #str.find(sub_s): 找到了返回第一个位置索引，没找到返回-1
                 
                 idx = mesbody.find('http')
@@ -44,7 +56,7 @@ class CrawlerTwit(object):
                     mesbody = mesbody[:idx]
         
                 if mesbody:
-                    data.append([mesbody, created_time])
+                    data.append([mesbody, created_time, image_urls])
                     
         except Exception as r:
             print("出错啦: %s" % r)

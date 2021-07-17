@@ -27,6 +27,7 @@ def test_crawler(TIME=300):
         print('---------start---------')
         craw = CrawlerTwit(users[key])
         craw_data = craw.get_datas()
+        print(craw_data)
         
         print('---------end------------\n\n\n')
 
