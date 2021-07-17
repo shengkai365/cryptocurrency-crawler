@@ -36,7 +36,7 @@ class CrawlerTwit(object):
                 twinfo = tw.get_tweetinfo(line['id'])
                 created_time = twinfo.contents['created_at']
                 mesbody = twinfo.contents['text']
-
+                print(twinfo.contents['media'])
                 #str.find(sub_s): 找到了返回第一个位置索引，没找到返回-1
                 
                 idx = mesbody.find('http')

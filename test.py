@@ -24,25 +24,11 @@ def test_db(key, msg):
 
 def test_crawler(TIME=300):
     for key in users.keys():
-            print('---------start---------')
-            craw = CrawlerTwit(users[key])
-            craw_data = craw.get_datas()
-
-            now = datetime.datetime.now()
-            for msg,time in craw_data:
-                
-                print('now:',now)
-                print('time:',time)
-                delta_time = (now.timestamp()-time.timestamp())
-                print('delta_time', delta_time)
-                print('msg', msg)
-                
-                # 超过5分钟不入库
-                if delta_time > TIME:
-                    continue 
-            
-                print("尝试插入: %s"% msg)
-            print('---------end------------\n\n\n')
+        print('---------start---------')
+        craw = CrawlerTwit(users[key])
+        craw_data = craw.get_datas()
+        
+        print('---------end------------\n\n\n')
 
 def test_with_temp_db(TIME):
     TABLE = 't_news_info_temp'
@@ -88,14 +74,14 @@ if __name__=="__main__":
 
     # ----------------------- |
     # 测试数据爬取是否正常
-    # test_crawler()
+    test_crawler()
     # ----------------------——  |
 
 
     # ----------------------- |
     # 用副表测试整个系统
     # 5h 以内的推特
-    test_with_temp_db(18000)
+    # test_with_temp_db(18000)
     # ----------------------——  |
 
 
