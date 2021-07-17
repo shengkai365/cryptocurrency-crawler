@@ -30,7 +30,7 @@ class CrawlerTwit(object):
         # 获取前10条推特
         try:
             tw = TwitterScraper()
-            tweets = tw.get_tweets(self.id, count=10)
+            tweets = tw.get_tweets(self.id, count=50)
             
             for line in tweets.contents:
                 twinfo = tw.get_tweetinfo(line['id'])
