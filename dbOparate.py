@@ -55,7 +55,7 @@ class DbOpt(object):
             return False 
 
     
-    def insert(self, key, msg):
+    def insert(self, key, msg, image_urls):
         try:
             # 创建数据库连接
             conn = pymysql.connect(
@@ -71,7 +71,7 @@ class DbOpt(object):
             # channel_id=2，channel=名人言论 ，level=2  ，is_keywords=N ,keywords_id=0,status=0，
             
             # sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id) values(9,'实时推特',%s,NULL,%s,NULL,2,%s,'N',0)"
-            sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id) values(%s,%s,%s,NULL,%s,NULL,2,%s,'N',0)"
+            sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id) values(%s,%s,%s,NULL,%s,%s,2,%s,'N',0)"
 
 
             channel_id = -1
@@ -93,9 +93,13 @@ class DbOpt(object):
 
             # times
             insertTimes = (datetime.datetime.now()+datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
-
+            
             mesbody = '推特 | ' + key + '：'+ msg
-            param=(channel_id, channel, mesbody, insertTimes, 'Twitter-{}'.format(key))
+            
+            # 暂时取前一个地址
+            image_url = '' if image_urls==[] else image_urls[0]
+
+            param=(channel_id, channel, mesbody, insertTimes, image_url, 'Twitter-{}'.format(key))
             
             can_insert = self.querySql(mesbody, channel_id)
 

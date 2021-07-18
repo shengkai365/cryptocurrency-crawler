@@ -2,7 +2,7 @@ from time import sleep
 import datetime 
 from crawlerTwitter import CrawlerTwit
 from dbOparate import DbOpt 
-
+from ImageAddressTransfer import Oss
 users = {   
         '马斯克':'elonmusk',
         'Coinbase':'CoinbasePro', 
@@ -27,14 +27,17 @@ def run(TABLE='',TIME=305):
             craw_data = craw.get_datas()
 
             now = datetime.datetime.now()
-            for msg, time in craw_data:
+            for msg, time, urls in craw_data:
 
                 # delta_time = (now-time).seconds
                 delta_time = now.timestamp()-time.timestamp()
                 # 超过5分钟不入库
                 if delta_time > TIME:
                     continue 
-                db_opt.insert(key, msg)
+                
+                oss = Oss()
+                image_urls = oss.transfer(urls)
+                db_opt.insert(key, msg, image_urls)
 
 
         print("Waite 5 minutes")
