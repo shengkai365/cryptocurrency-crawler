@@ -35,8 +35,15 @@ def run(TABLE='',TIME=305):
                 if delta_time > TIME:
                     continue 
                 
-                oss = Oss()
-                image_urls = oss.transfer(urls)
+                image_urls = []
+                try:
+                    oss = Oss()
+                    image_urls = oss.transfer(urls)
+                except Exception as r:
+                    print("出错啦: %s" % r)
+                    print(r.__traceback__.tb_frame.f_globals["__file__"])
+                    print(r.__traceback__.tb_lineno)
+
                 db_opt.insert(key, msg, image_urls)
 
 
