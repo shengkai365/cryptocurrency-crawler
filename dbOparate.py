@@ -113,7 +113,7 @@ class DbOpt(object):
                 #！！！！！！！！！！|
                 # 如果是正表, 发送企业微信
                 if self.TABLE=='t_news_info':
-                    send_msg(mesbody,channel)
+                    send_msg(mesbody,channel,image_url)
                     print("----发送企业微信成功----")
                 #！！！！！！！！！！|
                 

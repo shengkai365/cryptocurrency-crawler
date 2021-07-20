@@ -6,11 +6,13 @@ from itertools import islice
 class Oss(object):
     def __init__(self):
         self.Account = {
-            'AccessKeyID': '***************',
-            'AccessKeySecret': '***************************',
+            'AccessKeyID': 'LTAI5tMvK5h5xE2xHFefEAM9',
+            'AccessKeySecret': 'HbHyPnMuusaoSY9wF9KL4JqSUz3tLj',
             'BucketName': 'bpj-webfiles',
             'ImagePath' : 'images/twitter/'
         }
+        
+
         self.auth = oss2.Auth(self.Account['AccessKeyID'], self.Account['AccessKeySecret'])
         self.bucket = oss2.Bucket(self.auth, 'http://oss-cn-hangzhou.aliyuncs.com', self.Account['BucketName'])
     
@@ -20,13 +22,16 @@ class Oss(object):
         print('上传成功')
         time.sleep(1)
 
-        # url =  https://bpj-webfiles.oss-cn-hangzhou.aliyuncs.com/example/example.jpg
-        url = 'https://'+ self.Account['BucketName'] + '.oss-cn-hangzhou.aliyuncs.com/' + self.Account['ImagePath'] + name
+        # # url =  https://bpj-webfiles.oss-cn-hangzhou.aliyuncs.com/example/example.jpg
+        # url = 'https://'+ self.Account['BucketName'] + '.oss-cn-hangzhou.aliyuncs.com/' + self.Account['ImagePath'] + name
+        
+        # https://bpj-webfile.junshangxun.com/images/twitter/example.jpg
+        url = 'https://bpj-webfile.junshangxun.com/images/twitter/' + name 
         return url
 
     def list_from_oss(self):
         # oss2.ObjectIterator用于遍历文件。
-        for b in islice(oss2.ObjectIterator(self.bucket), 10):
+        for b in islice(oss2.ObjectIterator(self.bucket), 20):
             print(b.key)
 
     def delete_from_oss(self, object_name):
@@ -41,4 +46,6 @@ class Oss(object):
 
         return image_links
 
+oss = Oss()
+oss.list_from_oss()
 

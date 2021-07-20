@@ -2,19 +2,19 @@
 
 ###  Twitter 爬取需求
 
-| 推特名账号 | channel  | channel_id | 英文账号                   |
-| ---------- | -------- | ---------- | -------------------------- |
-| Butter     | 项目推特 | 16         | butterswap                 |
-| MiniDoge   | 项目推特 | 16         | MiniDOGEToken              |
-| BabyDoge   | 项目推特 | 16         | BabyDogeCoin               |
-| 孙宇晨     | 名人推特 | 2          | Justin Sun@justinsuntron   |
-| 赵长鹏     | 名人推特 | 2          | CZ Binance@cz_binance      |
-| 马斯克     | 名人推特 | 2          | Elon Musk@elonmusk         |
-| 灰度创始人 | 名人推特 | 2          | Barry Silbert@BarrySilbert |
-| 火币       | 平台推特 | 9          | Huobi@HuobiGlobal          |
-| 灰度资本   | 平台推特 | 9          | Grayscale@Grayscale        |
-| 欧易       | 平台推特 | 9          | OKEx@OKEx                  |
-| Coinbase   | 平台推特 | 9          | Coinbase Pro@CoinbasePro   |
+| 推特名账号 | channel  | channel_id | name          |
+| ---------- | -------- | ---------- | ------------- |
+| Butter     | 项目推特 | 16         | butterswap    |
+| MiniDoge   | 项目推特 | 16         | MiniDOGEToken |
+| BabyDoge   | 项目推特 | 16         | BabyDogeCoin  |
+| 孙宇晨     | 名人推特 | 2          | justinsuntron |
+| 赵长鹏     | 名人推特 | 2          | cz_binance    |
+| 马斯克     | 名人推特 | 2          | elonmusk      |
+| 灰度创始人 | 名人推特 | 2          | BarrySilbert  |
+| 火币       | 平台推特 | 9          | HuobiGlobal   |
+| 灰度资本   | 平台推特 | 9          | Grayscale     |
+| 欧易       | 平台推特 | 9          | OKEx          |
+| Coinbase   | 平台推特 | 9          | CoinbasePro   |
 
 ### 币世界名人
 

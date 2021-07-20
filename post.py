@@ -3,12 +3,13 @@ import urllib3
 from urllib.parse import urlencode
 
 
-def send_msg(mesbody,channel):
+def send_msg(mesbody,channel,image_url):
     try:
         url = "https://bpj-s.junshangxun.com/sendmessage"
         values = {
             "title": mesbody,
-            "channel" :channel
+            "channel": channel,
+            "mesbody": image_url
         }
         a = requests.post(url, json=values)
         print(a)
