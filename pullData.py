@@ -368,8 +368,8 @@ class PullData(object):
         return array
         
 S = PullData()
-array = S.getPullBishijieCelebrity()
-for line in array:
-    print(line)
+array = S.getPullGateio()
+# for line in array:
+#     print(line)
 
 

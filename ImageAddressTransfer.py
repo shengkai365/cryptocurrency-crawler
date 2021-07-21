@@ -46,6 +46,3 @@ class Oss(object):
 
         return image_links
 
-oss = Oss()
-oss.list_from_oss()
-

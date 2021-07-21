@@ -12,9 +12,11 @@ def send_msg(mesbody,channel,image_url):
             "mesbody": image_url
         }
         a = requests.post(url, json=values)
-        print(a)
+        print(a, '发送成功')
+
         
     except Exception as r:
+        print("----发送企业微信失败----")
         print("出错啦: %s" % r)
         print(r.__traceback__.tb_frame.f_globals["__file__"])
         print(r.__traceback__.tb_lineno)
