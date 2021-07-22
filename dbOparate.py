@@ -71,7 +71,7 @@ class DbOpt(object):
             # channel_id=2，channel=名人言论 ，level=2  ，is_keywords=N ,keywords_id=0,status=0，
             
             # sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id) values(9,'实时推特',%s,NULL,%s,NULL,2,%s,'N',0)"
-            sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id) values(%s,%s,%s,NULL,%s,%s,2,%s,'N',0)"
+            sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id,images) values(%s,%s,%s,NULL,%s,NULL,2,%s,'N',0,%s)"
 
 
             channel_id = -1
@@ -97,9 +97,9 @@ class DbOpt(object):
             mesbody = '推特 | ' + key + '：'+ msg
             
             # 暂时取前一个地址
-            image_url = '' if image_urls==[] else image_urls[0]
+            image_url = '' if image_urls==[] else ','.join(image_urls)
 
-            param=(channel_id, channel, mesbody, insertTimes, image_url, 'Twitter-{}'.format(key))
+            param=(channel_id, channel, mesbody, insertTimes, 'Twitter-{}'.format(key),image_url)
             
             can_insert = self.querySql(mesbody, channel_id)
 
