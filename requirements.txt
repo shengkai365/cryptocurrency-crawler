@@ -1,0 +1,7 @@
+pytwitterscraper
+pymysql
+python-Levenshtein
+fuzzywuzzy
+requests
+oss2
+requests_html

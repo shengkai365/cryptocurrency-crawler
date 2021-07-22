@@ -6,8 +6,8 @@ from itertools import islice
 class Oss(object):
     def __init__(self):
         self.Account = {
-            'AccessKeyID': '*****',
-            'AccessKeySecret': '********',
+            'AccessKeyID': 'LTAI5tMvK5h5xE2xHFefEAM9',
+            'AccessKeySecret': 'HbHyPnMuusaoSY9wF9KL4JqSUz3tLj',
             'BucketName': 'bpj-webfiles',
             'ImagePath' : 'images/twitter/'
         }
@@ -45,4 +45,3 @@ class Oss(object):
             image_links.append(self.put_to_oss(name, urls[i]))
 
         return image_links
-
