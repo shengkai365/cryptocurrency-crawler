@@ -6,8 +6,8 @@ from itertools import islice
 class Oss(object):
     def __init__(self):
         self.Account = {
-            'AccessKeyID': 'LTAI5tMvK5h5xE2xHFefEAM9',
-            'AccessKeySecret': 'HbHyPnMuusaoSY9wF9KL4JqSUz3tLj',
+            'AccessKeyID': '******',
+            'AccessKeySecret': '*******',
             'BucketName': 'bpj-webfiles',
             'ImagePath' : 'images/twitter/'
         }
