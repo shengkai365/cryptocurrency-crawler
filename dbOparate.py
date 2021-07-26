@@ -1,7 +1,7 @@
 # from google_trans_new import google_translator
 import pymysql
 import datetime
-from post import send_msg
+from tools import send_msg
 
 
 

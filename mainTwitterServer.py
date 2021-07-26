@@ -3,6 +3,8 @@ import datetime
 from crawlerTwitter import CrawlerTwit
 from dbOparate import DbOpt 
 from ImageAddressTransfer import Oss
+from tools import generateHTML
+
 users = {   
         '马斯克':'elonmusk',
         'Coinbase':'CoinbasePro', 
@@ -16,6 +18,14 @@ users = {
         'MiniDoge':'MiniDOGEToken',
         'BabyDoge':'BabyDogeCoin'
     }
+account = {
+            'AccessKeyID': '******',
+            'AccessKeySecret': '*******',
+            'BucketName': 'bpj-webfiles',
+            'ImagePath' : 'images/twitter/'
+        }
+
+HTML_SAVE_PATH = '/root/twitter-html'
 
 def run(TABLE, TIME=60):
     db_opt = DbOpt()
@@ -35,10 +45,14 @@ def run(TABLE, TIME=60):
                 if delta_time > TIME:
                     continue 
                 
+
                 image_urls = []
                 try:
-                    oss = Oss()
+                    oss = Oss(account)
                     image_urls = oss.transfer(urls)
+                    GEN_HTML_PATH = generateHTML(key, msg, image_urls, HTML_SAVE_PATH)
+                    HTML_url = oss.put_HTML_to_oss(GEN_HTML_PATH)
+                    print(HTML_url)
                 except Exception as r:
                     print("出错啦: %s" % r)
                     print(r.__traceback__.tb_frame.f_globals["__file__"])

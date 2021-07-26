@@ -4,22 +4,15 @@ import oss2
 from itertools import islice
 
 class Oss(object):
-    def __init__(self):
-        self.Account = {
-            'AccessKeyID': '******',
-            'AccessKeySecret': '*******',
-            'BucketName': 'bpj-webfiles',
-            'ImagePath' : 'images/twitter/'
-        }
-        
-
+    def __init__(self,account):
+        self.Account = account 
         self.auth = oss2.Auth(self.Account['AccessKeyID'], self.Account['AccessKeySecret'])
         self.bucket = oss2.Bucket(self.auth, 'http://oss-cn-hangzhou.aliyuncs.com', self.Account['BucketName'])
     
-    def put_to_oss(self, name, link):
+    def put_image_to_oss(self, name, link):
         input = requests.get(link)
         self.bucket.put_object(self.Account['ImagePath']+name, input)
-        print('上传成功')
+        print('上传图片成功')
         time.sleep(1)
 
         # # url =  https://bpj-webfiles.oss-cn-hangzhou.aliyuncs.com/example/example.jpg
@@ -28,6 +21,16 @@ class Oss(object):
         # https://bpj-webfile.junshangxun.com/images/twitter/example.jpg
         url = 'https://bpj-webfile.junshangxun.com/images/twitter/' + name 
         return url
+    
+    def put_HTML_to_oss(self,GEN_HTML_PATH):
+
+        name = GEN_HTML_PATH.split('/')[-1]
+        self.bucket.put_object(self.Account['ImagePath']+name, GEN_HTML_PATH)
+        print('上传HTML成功')
+        time.sleep(1)
+
+        HTML_url = 'https://bpj-webfile.junshangxun.com/images/twitter/' + name 
+        return HTML_url 
 
     def list_from_oss(self):
         # oss2.ObjectIterator用于遍历文件。
@@ -42,6 +45,8 @@ class Oss(object):
         image_links = []
         for i in range(len(urls)):
             name = urls[i].split('/')[-1]
-            image_links.append(self.put_to_oss(name, urls[i]))
+            image_links.append(self.put_image_to_oss(name, urls[i]))
 
         return image_links
+
+    

@@ -1,6 +1,5 @@
 from pytwitterscraper import TwitterScraper
 
-
 class CrawlerTwit(object):
 
     def __init__(self,twitter_name):
