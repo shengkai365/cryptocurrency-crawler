@@ -3,6 +3,13 @@ import requests
 import oss2
 from itertools import islice
 
+account = {
+            'AccessKeyID': '**************',
+            'AccessKeySecret': '*****************',
+            'BucketName': 'bpj-webfiles',
+            'ImagePath' : 'images/twitter/'
+        }
+
 class Oss(object):
     def __init__(self,account):
         self.Account = account 
@@ -49,4 +56,5 @@ class Oss(object):
 
         return image_links
 
-    
+# oss = Oss(account)
+# oss.list_from_oss()
