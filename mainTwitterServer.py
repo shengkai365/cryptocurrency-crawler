@@ -25,7 +25,7 @@ account = {
             'ImagePath' : 'images/twitter/'
         }
 
-HTML_SAVE_PATH = '/root/twitter-html'
+HTML_SAVE_PATH = '/root/twitter-html/'
 
 def run(TABLE, TIME=60):
     db_opt = DbOpt()

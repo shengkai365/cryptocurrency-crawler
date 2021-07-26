@@ -6,7 +6,7 @@ from crawlerTwitter import CrawlerTwit
 from time import sleep
 from mainTwitterServer import run 
 from pytwitterscraper import TwitterScraper
-from post import send_msg 
+from tools import send_msg 
 
 users = {   
     '马斯克':'elonmusk',
