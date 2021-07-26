@@ -4,8 +4,8 @@ import oss2
 from itertools import islice
 
 account = {
-            'AccessKeyID': '**************',
-            'AccessKeySecret': '*****************',
+            'AccessKeyID': '***************',
+            'AccessKeySecret': '**********************',
             'BucketName': 'bpj-webfiles',
             'ImagePath' : 'images/twitter/'
         }
@@ -32,7 +32,7 @@ class Oss(object):
     def put_HTML_to_oss(self,GEN_HTML_PATH):
 
         name = GEN_HTML_PATH.split('/')[-1]
-        self.bucket.put_object(self.Account['ImagePath']+name, GEN_HTML_PATH)
+        self.bucket.put_object_from_file(self.Account['ImagePath']+name, GEN_HTML_PATH)
         print('上传HTML成功')
         time.sleep(1)
 
@@ -41,11 +41,14 @@ class Oss(object):
 
     def list_from_oss(self):
         # oss2.ObjectIterator用于遍历文件。
-        for b in islice(oss2.ObjectIterator(self.bucket), 20):
+        for b in islice(oss2.ObjectIterator(self.bucket), 1000):
             print(b.key)
 
     def delete_from_oss(self, object_name):
         self.bucket.delete_object(object_name)
+
+    def download_form_oss(self,object_name, local_path):
+        self.bucket.get_object_to_file(object_name, local_path)
 
     def transfer(self, urls):
         
@@ -58,3 +61,9 @@ class Oss(object):
 
 # oss = Oss(account)
 # oss.list_from_oss()
+# object_name = 'images/twitter/twitter-html马斯克3391476.html'
+# local_path = 'C:/Users/shengkai/Desktop/test.html'
+# oss.download_form_oss(object_name,local_path)
+# oss.delete_from_oss(object_name)
+
+ 
