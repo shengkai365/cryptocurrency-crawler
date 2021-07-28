@@ -20,7 +20,7 @@ class Oss(object):
         input = requests.get(link)
         self.bucket.put_object(self.Account['ImagePath']+name, input)
         print('上传图片成功')
-        time.sleep(1)
+        time.sleep(0.1)
 
         # # url =  https://bpj-webfiles.oss-cn-hangzhou.aliyuncs.com/example/example.jpg
         # url = 'https://'+ self.Account['BucketName'] + '.oss-cn-hangzhou.aliyuncs.com/' + self.Account['ImagePath'] + name
@@ -34,7 +34,7 @@ class Oss(object):
         name = GEN_HTML_PATH.split('/')[-1]
         self.bucket.put_object_from_file(self.Account['ImagePath']+name, GEN_HTML_PATH)
         print('上传HTML成功')
-        time.sleep(1)
+        time.sleep(0.1)
 
         HTML_url = 'https://bpj-webfile.junshangxun.com/images/twitter/' + name 
         return HTML_url 

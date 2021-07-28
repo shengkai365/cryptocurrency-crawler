@@ -27,7 +27,7 @@ account = {
 
 HTML_SAVE_PATH = '/root/twitter-html/'
 
-def run(TABLE, TIME=60):
+def run(TABLE, TIME=180):
     db_opt = DbOpt()
     db_opt.TABLE = TABLE
     
@@ -62,7 +62,7 @@ def run(TABLE, TIME=60):
 
 
         print("--------------one cycle---------------")
-        sleep(2)
+        sleep(1)
 
 
 if __name__=="__main__":
