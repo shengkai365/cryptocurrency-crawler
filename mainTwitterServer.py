@@ -27,7 +27,7 @@ account = {
 
 HTML_SAVE_PATH = '/root/twitter-html/'
 
-def run(TABLE, TIME=60):
+def run(TABLE, TIME=120):
     db_opt = DbOpt()
     db_opt.TABLE = TABLE
     
@@ -41,7 +41,7 @@ def run(TABLE, TIME=60):
 
                 # delta_time = (now-time).seconds
                 delta_time = now.timestamp()-time.timestamp()
-                # 超过1分钟不入库
+                # 超过2分钟不入库
                 if delta_time > TIME:
                     continue 
                 
@@ -59,7 +59,7 @@ def run(TABLE, TIME=60):
                     print(r.__traceback__.tb_lineno)
 
                 db_opt.insert(key, msg, image_urls, HTML_url)
-
+                
 
         print("--------------one cycle---------------")
         sleep(2)
