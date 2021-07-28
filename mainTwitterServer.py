@@ -27,7 +27,7 @@ account = {
 
 HTML_SAVE_PATH = '/root/twitter-html/'
 
-def run(TABLE, TIME=180):
+def run(TABLE, TIME=60):
     db_opt = DbOpt()
     db_opt.TABLE = TABLE
     
@@ -45,24 +45,24 @@ def run(TABLE, TIME=180):
                 if delta_time > TIME:
                     continue 
                 
-
+                HTML_url = ''
                 image_urls = []
                 try:
                     oss = Oss(account)
                     image_urls = oss.transfer(urls)
                     GEN_HTML_PATH = generateHTML(key, msg, image_urls, HTML_SAVE_PATH)
                     HTML_url = oss.put_HTML_to_oss(GEN_HTML_PATH)
-                    print(HTML_url)
+                    
                 except Exception as r:
                     print("出错啦: %s" % r)
                     print(r.__traceback__.tb_frame.f_globals["__file__"])
                     print(r.__traceback__.tb_lineno)
 
-                db_opt.insert(key, msg, image_urls)
+                db_opt.insert(key, msg, image_urls, HTML_url)
 
 
         print("--------------one cycle---------------")
-        sleep(1)
+        sleep(2)
 
 
 if __name__=="__main__":

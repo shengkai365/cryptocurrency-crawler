@@ -64,13 +64,14 @@ def generateHTML(key, msg, image_urls, save_path):
 
 
 import requests 
-def send_msg(mesbody,channel,image_url):
+def send_msg(mesbody, channel, image_url, html_url):
     try:
         url = "https://bpj-s.junshangxun.com/sendmessage"
         values = {
             "title": mesbody,
             "channel": channel,
-            "mesbody": image_url
+            "mesbody": image_url,
+            "urls": html_url
         }
         a = requests.post(url, json=values)
         print(a, '发送成功')

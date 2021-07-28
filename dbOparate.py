@@ -55,7 +55,7 @@ class DbOpt(object):
             return False 
 
     
-    def insert(self, key, msg, image_urls):
+    def insert(self, key, msg, image_urls, html_url):
         try:
             # 创建数据库连接
             conn = pymysql.connect(
@@ -113,7 +113,7 @@ class DbOpt(object):
                 #！！！！！！！！！！|
                 # 如果是正表, 发送企业微信
                 if self.TABLE=='t_news_info':
-                    send_msg(mesbody,channel,image_url)
+                    send_msg(mesbody,channel,image_url,html_url)
                 #！！！！！！！！！！|
                 
                 print('插入{}成功: {}'.format(self.TABLE, mesbody))
