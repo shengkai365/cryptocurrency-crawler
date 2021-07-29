@@ -12,7 +12,9 @@ class TwitterInfo(object):
         self.image_urls_list = None 
         self.msg = msg 
         self.name = name 
-        print("-------inital TwitterInfo success------")
+
+        self.inital()
+        print("--------------init TwitterInfo------")
 
     def inital(self):
         if self.key in {'Butter','MiniDoge','BabyDoge'}:
@@ -41,7 +43,7 @@ class CrawlerTwit(object):
         
         self.id = None 
         self.initial_id()
-        print("---------inital CrawlerTwit success---------")
+        print("------init CrawlerTwit success---------")
 
     def initial_id(self):
         try:
