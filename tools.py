@@ -64,17 +64,17 @@ def generateHTML(twit_info, save_path):
 
 
 import requests 
-def send_msg(mesbody, channel, image_url, html_url):
+def send_msg(twit_info):
     try:
         url = "https://bpj-s.junshangxun.com/sendmessage"
         values = {
-            "title": mesbody,
-            "channel": channel,
-            "mesbody": image_url,
-            "urls": html_url
+            "title": twit_info.mesbody,
+            "channel": twit_info.channel,
+            "mesbody": twit_info.image_url,
+            "urls": twit_info.html_url
         }
         a = requests.post(url, json=values)
-        print(a, '发送成功')
+        print(a, '---发送企业微信成功---')
 
         
     except Exception as r:

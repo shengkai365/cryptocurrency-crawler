@@ -7,7 +7,7 @@ class TwitterInfo(object):
         self.channel = None 
         self.mesbody = '推特 | ' + key + '：'+ msg
         self.image_url = None 
-        self.HTML_url = None 
+        self.html_url = None 
 
         self.image_urls_list = None 
         self.msg = msg 
@@ -33,8 +33,8 @@ class TwitterInfo(object):
         self.image_urls_list = image_urls 
         self.image_url = '' if image_urls==[] else ','.join(image_urls)
         
-    def inital_oss_html_url(self, HTML_url):
-        self.HTML_ulr = HTML_url 
+    def inital_oss_html_url(self, html_url):
+        self.html_ulr = html_url 
 
 class CrawlerTwit(object):
 

@@ -5,6 +5,7 @@ from dbOparate import DbOpt
 from ImageAddressTransfer import Oss
 from tools import generateHTML
 from crawlerTwitter import TwitterInfo
+from tools import send_msg
 
 users = {   
         '马斯克':'elonmusk',
@@ -48,21 +49,34 @@ def run(TABLE, TIME=120):
                 can_insert = db_opt.querySql(twit_info.mesbody, twit_info.channel_id)
 
                 # 超过2分钟不入库
-                if delta_time > TIME or not can_insert:
+                if delta_time > TIME:
                     continue 
+
+                # 数据存在不入库
+                if not can_insert:
+                    print('data exist: {}'.format(twit_info.mesbody))
+                    continue 
+
                 
+            
                
                 oss = Oss(account)
                 image_urls = oss.transfer(urls)
                 twit_info.inital_oss_image_url(image_urls)
 
                 GEN_HTML_LOCAL_PATH = generateHTML(twit_info, HTML_SAVE_PATH)
-                HTML_url = oss.put_HTML_to_oss(GEN_HTML_LOCAL_PATH)
+                html_url = oss.put_HTML_to_oss(GEN_HTML_LOCAL_PATH)
                     
 
-                twit_info.inital_oss_html_url(HTML_url)
-                
+                twit_info.inital_oss_html_url(html_url)
+
+                #！！！！！！！！！！|
+                # 如果是正表, 发送企业微信
+                if db_opt.TABLE=='t_news_info':
+                    send_msg(twit_info)
+                #！！！！！！！！！！|
                 db_opt.insert(twit_info)
+
                 
         count += 1
         print("--------------step%s---------------"%count)

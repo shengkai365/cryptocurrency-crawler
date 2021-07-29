@@ -80,28 +80,13 @@ class DbOpt(object):
 
             param=(twit_info.channel_id, twit_info.channel, twit_info.mesbody, insertTimes, 'Twitter-{}'.format(twit_info.key), twit_info.image_url)
             
-            can_insert = self.querySql(mesbody, channel_id)
-
         
-            if can_insert:
-                print("准备插入: %s" % mesbody[:20])
-                #！！！！！！！！！！|
-                cursor.execute(sql, param)
-                #！！！！！！！！！！|
+            cursor.execute(sql, param)
+            
+            print('插入{}成功: {}'.format(self.TABLE, twit_info.mesbody))
+            print('插入北京时间:%s' % insertTimes)
+            print('\n')
 
-                #！！！！！！！！！！|
-                # 如果是正表, 发送企业微信
-                if self.TABLE=='t_news_info':
-                    send_msg(mesbody,channel,image_url,html_url)
-                #！！！！！！！！！！|
-                
-                print('插入{}成功: {}'.format(self.TABLE, mesbody))
-                print('插入北京时间:%s' % insertTimes)
-
-            else:
-                print('data exist: {}'.format(mesbody))
-
-            print('\n\n')
             #提交
             conn.commit()
             #关闭连接
