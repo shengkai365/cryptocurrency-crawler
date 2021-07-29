@@ -14,7 +14,6 @@ class TwitterInfo(object):
         self.name = name 
 
         self.inital()
-        print("--------------init TwitterInfo------")
 
     def inital(self):
         if self.key in {'Butter','MiniDoge','BabyDoge'}:
@@ -43,7 +42,6 @@ class CrawlerTwit(object):
         
         self.id = None 
         self.initial_id()
-        print("------init CrawlerTwit success---------")
 
     def initial_id(self):
         try:

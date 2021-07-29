@@ -66,7 +66,7 @@ def run(TABLE, TIME=120):
 
                 GEN_HTML_LOCAL_PATH = generateHTML(twit_info, HTML_SAVE_PATH)
                 html_url = oss.put_HTML_to_oss(GEN_HTML_LOCAL_PATH)
-                    
+                print(html_url)
 
                 twit_info.inital_oss_html_url(html_url)
 
@@ -79,7 +79,8 @@ def run(TABLE, TIME=120):
 
                 
         count += 1
-        print("--------------step%s---------------"%count)
+        print("--------------step%s%s%s%s%s---------------"%count,count,count,count,count)
+        print("\n\n")
 
 
 if __name__=="__main__":
