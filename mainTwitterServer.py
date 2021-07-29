@@ -4,6 +4,7 @@ from crawlerTwitter import CrawlerTwit
 from dbOparate import DbOpt 
 from ImageAddressTransfer import Oss
 from tools import generateHTML
+from crawlerTwitter import TwitterInfo
 
 users = {   
         '马斯克':'elonmusk',
@@ -30,7 +31,8 @@ HTML_SAVE_PATH = '/root/twitter-html/'
 def run(TABLE, TIME=120):
     db_opt = DbOpt()
     db_opt.TABLE = TABLE
-    
+    count = 0
+
     while True:
         for key in users.keys():
             craw = CrawlerTwit(users[key])
@@ -41,28 +43,29 @@ def run(TABLE, TIME=120):
 
                 # delta_time = (now-time).seconds
                 delta_time = now.timestamp()-time.timestamp()
+                
+                twit_info = TwitterInfo(key, msg, users[key])
+                can_insert = db_opt.querySql(twit_info.mesbody, twit_info.channel_id)
+
                 # 超过2分钟不入库
-                if delta_time > TIME:
+                if delta_time > TIME or not can_insert:
                     continue 
                 
-                HTML_url = ''
-                image_urls = []
-                try:
-                    oss = Oss(account)
-                    image_urls = oss.transfer(urls)
-                    GEN_HTML_PATH = generateHTML(key, msg, image_urls, HTML_SAVE_PATH)
-                    HTML_url = oss.put_HTML_to_oss(GEN_HTML_PATH)
+               
+                oss = Oss(account)
+                image_urls = oss.transfer(urls)
+                twit_info.inital_oss_image_url(image_urls)
+
+                GEN_HTML_LOCAL_PATH = generateHTML(twit_info, HTML_SAVE_PATH)
+                HTML_url = oss.put_HTML_to_oss(GEN_HTML_LOCAL_PATH)
                     
-                except Exception as r:
-                    print("出错啦: %s" % r)
-                    print(r.__traceback__.tb_frame.f_globals["__file__"])
-                    print(r.__traceback__.tb_lineno)
 
-                db_opt.insert(key, msg, image_urls, HTML_url)
+                twit_info.inital_oss_html_url(HTML_url)
                 
-
-        print("--------------one cycle---------------")
-        sleep(2)
+                db_opt.insert(twit_info)
+                
+        count += 1
+        print("--------------step%s---------------"%count)
 
 
 if __name__=="__main__":

@@ -1,12 +1,47 @@
 from pytwitterscraper import TwitterScraper
 
+class TwitterInfo(object):
+    def __init__(self, key, msg, name):
+        self.key = key 
+        self.channel_id = None 
+        self.channel = None 
+        self.mesbody = '推特 | ' + key + '：'+ msg
+        self.image_url = None 
+        self.HTML_url = None 
+
+        self.image_urls_list = None 
+        self.msg = msg 
+        self.name = name 
+        print("-------inital TwitterInfo success------")
+
+    def inital(self):
+        if self.key in {'Butter','MiniDoge','BabyDoge'}:
+            self.channel_id = 16
+            self.channel = '项目推特'
+        
+        if self.key in {'孙宇晨','赵长鹏','马斯克','灰度创始人'}:
+            self.channel_id = 2
+            self.channel = '名人推特'
+        
+        if self.key in {'火币','灰度资本','欧易','Coinbase'}:
+            self.channel_id = 9
+            self.channel = '平台推特'
+    
+    def inital_oss_image_url(self, image_urls):
+        self.image_urls_list = image_urls 
+        self.image_url = '' if image_urls==[] else ','.join(image_urls)
+        
+    def inital_oss_html_url(self, HTML_url):
+        self.HTML_ulr = HTML_url 
+
 class CrawlerTwit(object):
 
-    def __init__(self,twitter_name):
+    def __init__(self, twitter_name):
         self.name = twitter_name 
         
         self.id = None 
         self.initial_id()
+        print("---------inital CrawlerTwit success---------")
 
     def initial_id(self):
         try:
@@ -29,7 +64,7 @@ class CrawlerTwit(object):
         # 获取前10条推特
         try:
             tw = TwitterScraper()
-            tweets = tw.get_tweets(self.id, count=5)
+            tweets = tw.get_tweets(self.id, count=2)
             
             for line in tweets.contents:
                 twinfo = tw.get_tweetinfo(line['id'])

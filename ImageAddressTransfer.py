@@ -15,12 +15,18 @@ class Oss(object):
         self.Account = account 
         self.auth = oss2.Auth(self.Account['AccessKeyID'], self.Account['AccessKeySecret'])
         self.bucket = oss2.Bucket(self.auth, 'http://oss-cn-hangzhou.aliyuncs.com', self.Account['BucketName'])
-    
+        print('-----inital oss success-----')
+        
     def put_image_to_oss(self, name, link):
-        input = requests.get(link)
-        self.bucket.put_object(self.Account['ImagePath']+name, input)
-        print('上传图片成功')
-        time.sleep(0.1)
+        try:
+            input = requests.get(link)
+            self.bucket.put_object(self.Account['ImagePath']+name, input)
+            print('上传图片成功')
+
+        except Exception as r:
+            print("上传oss图片出错: %s" % r)
+            print(r.__traceback__.tb_frame.f_globals["__file__"])
+            print(r.__traceback__.tb_lineno)
 
         # # url =  https://bpj-webfiles.oss-cn-hangzhou.aliyuncs.com/example/example.jpg
         # url = 'https://'+ self.Account['BucketName'] + '.oss-cn-hangzhou.aliyuncs.com/' + self.Account['ImagePath'] + name
@@ -30,12 +36,17 @@ class Oss(object):
         return url
     
     def put_HTML_to_oss(self,GEN_HTML_PATH):
-
         name = GEN_HTML_PATH.split('/')[-1]
-        self.bucket.put_object_from_file(self.Account['ImagePath']+name, GEN_HTML_PATH)
-        print('上传HTML成功')
-        time.sleep(0.1)
 
+        try:
+            self.bucket.put_object_from_file(self.Account['ImagePath']+name, GEN_HTML_PATH)
+            print('上传HTML成功')
+
+        except Exception as r:
+            print("上传HTML图片出错: %s" % r)
+            print(r.__traceback__.tb_frame.f_globals["__file__"])
+            print(r.__traceback__.tb_lineno)
+        
         HTML_url = 'https://bpj-webfile.junshangxun.com/images/twitter/' + name 
         return HTML_url 
 

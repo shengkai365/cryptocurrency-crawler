@@ -16,6 +16,7 @@ class DbOpt(object):
             "password": "quanzu_db_passowrd",
             "database": "shangtu"
         }
+        print('------------inital DbOpt success-----------')
 
     # 查看数据库中 mesbody 是否存在, 不存在返回True(可插入), 反之亦然.
     def querySql(self, mesbody, channel_id):
@@ -55,7 +56,7 @@ class DbOpt(object):
             return False 
 
     
-    def insert(self, key, msg, image_urls, html_url):
+    def insert(self, twit_info):
         try:
             # 创建数据库连接
             conn = pymysql.connect(
@@ -73,33 +74,11 @@ class DbOpt(object):
             # sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id) values(9,'实时推特',%s,NULL,%s,NULL,2,%s,'N',0)"
             sql="insert into " + self.TABLE + "(channel_id,channel,title,url,times,mesbody,level,site,is_keywords,keywords_id,images) values(%s,%s,%s,NULL,%s,NULL,2,%s,'N',0,%s)"
 
-
-            channel_id = -1
-            channel = ' '
-
-            if key in {'Butter','MiniDoge','BabyDoge'}:
-                channel_id = 16
-                channel = '项目推特'
-            
-            if key in {'孙宇晨','赵长鹏','马斯克','灰度创始人'}:
-                channel_id = 2
-                channel = '名人推特'
-            
-            if key in {'火币','灰度资本','欧易','Coinbase'}:
-                channel_id = 9
-                channel = '平台推特'
-        
-
-
             # times
             insertTimes = (datetime.datetime.now()+datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
             
-            mesbody = '推特 | ' + key + '：'+ msg
-            
-            # 暂时取前一个地址
-            image_url = '' if image_urls==[] else ','.join(image_urls)
 
-            param=(channel_id, channel, mesbody, insertTimes, 'Twitter-{}'.format(key),image_url)
+            param=(twit_info.channel_id, twit_info.channel, twit_info.mesbody, insertTimes, 'Twitter-{}'.format(twit_info.key), twit_info.image_url)
             
             can_insert = self.querySql(mesbody, channel_id)
 

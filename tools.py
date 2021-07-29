@@ -1,10 +1,10 @@
 import datetime
 import time
-def generateHTML(key, msg, image_urls, save_path):
-    GEN_HTML_PATH = save_path + key + str(time.time())[-7:] + '.html' # 命名生成的html
+def generateHTML(twit_info, save_path):
+    GEN_HTML_PATH = save_path + twit_info.name + str(time.time())[-7:] + '.html' # 命名生成的html
 
-    title= '推特 | ' + key 
-    mesbody = msg 
+    title= '推特 | ' + twit_info.key 
+    mesbody = twit_info.msg 
 
     dt = datetime.datetime.now()+datetime.timedelta(hours=8)
     nowtime = dt.strftime("%Y-%m-%d %H:%M:%S")
@@ -40,11 +40,11 @@ def generateHTML(key, msg, image_urls, save_path):
         </div>
         <div class="image-box">"""%(title,nowtime,mesbody)
 
-    for i in range(len(image_urls)):
+    for i in range(len(twit_info.image_urls_list)):
         html += """
             <div class="image-item">
             <img src="%s" alt="" srcset="">
-            </div>"""%image_urls[i]
+            </div>"""%twit_info.image_urls_list[i]
         
     html += """
         </div>
