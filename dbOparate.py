@@ -47,8 +47,7 @@ class DbOpt(object):
             print("出错啦: %s" % r)
             print(r.__traceback__.tb_frame.f_globals["__file__"])
             print(r.__traceback__.tb_lineno)
-
-        
+            return False 
 
         if len(res)==0:
             return True 

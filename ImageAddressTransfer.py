@@ -21,7 +21,7 @@ class Oss(object):
         try:
             input = requests.get(link)
             self.bucket.put_object(self.Account['ImagePath']+name, input)
-            print('上传图片成功')
+            print('------上传图片成功-----')
 
         except Exception as r:
             print("上传oss图片出错: %s" % r)
@@ -40,7 +40,7 @@ class Oss(object):
 
         try:
             self.bucket.put_object_from_file(self.Account['ImagePath']+name, GEN_HTML_PATH)
-            print('上传HTML成功')
+            print('-----上传HTML成功-----')
 
         except Exception as r:
             print("上传HTML图片出错: %s" % r)
