@@ -2,7 +2,7 @@
 import pymysql
 import datetime
 from tools import send_msg
-
+import re 
 
 
 class DbOpt(object):
@@ -32,8 +32,8 @@ class DbOpt(object):
 
             cursor=conn.cursor()
             
-            query = 'select * from ' + self.TABLE + ' where title="' + mesbody + '" and channel_id={}'.format(channel_id)
-
+            # query = 'select * from ' + self.TABLE + ' where title="' + mesbody + '" and channel_id={}'.format(channel_id)
+            query = 'select * from %s where channel_id=%s and title="%s"'%(self.TABLE, channel_id, re.escape(mesbody))
             cursor.execute(query)    
             res = cursor.fetchall()
 
@@ -53,7 +53,7 @@ class DbOpt(object):
             return True 
         else:
             return False 
-
+    
     
     def insert(self, twit_info):
         try:
@@ -97,5 +97,6 @@ class DbOpt(object):
             print(r.__traceback__.tb_frame.f_globals["__file__"])
             print(r.__traceback__.tb_lineno)
             
-        
-        
+# opt = DbOpt()
+# flag = opt.querySql('推特 | 赵长鹏：#GameFi #BinanceSmartChain #BNB',2)
+# print(flag)
