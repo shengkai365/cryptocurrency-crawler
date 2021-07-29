@@ -59,8 +59,10 @@ def run(TABLE, TIME=120):
 
                
                 oss = Oss(account)
+                
                 image_urls = oss.transfer(urls)
                 twit_info.inital_oss_image_url(image_urls)
+                print('上传图片地址：',twit_info.image_urls_list)
 
                 GEN_HTML_LOCAL_PATH = generateHTML(twit_info, HTML_SAVE_PATH)
                 html_url = oss.put_HTML_to_oss(GEN_HTML_LOCAL_PATH)
