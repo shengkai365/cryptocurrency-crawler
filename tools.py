@@ -22,7 +22,7 @@ def generateHTML(twit_info, save_path):
         <meta content="yes" name="apple-mobile-web-app-capable" />
         <meta content="black" name="apple-mobile-web-app-status-bar-style" />
         <meta content="telephone=no" name="format-detection" />
-        <title>html模板</title>
+        <title>实时推特</title>
     </head>
     <body>
         <div class="box-warp">

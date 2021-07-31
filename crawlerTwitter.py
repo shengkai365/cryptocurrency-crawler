@@ -33,7 +33,7 @@ class TwitterInfo(object):
         self.image_url = '' if image_urls==[] else ','.join(image_urls)
         
     def inital_oss_html_url(self, html_url):
-        self.html_ulr = html_url 
+        self.html_url = html_url 
 
 class CrawlerTwit(object):
 

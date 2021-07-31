@@ -44,14 +44,12 @@ def run(TABLE, TIME=120):
 
                 # delta_time = (now-time).seconds
                 delta_time = now.timestamp()-time.timestamp()
-                
-                twit_info = TwitterInfo(key, msg, users[key])
-                can_insert = db_opt.querySql(twit_info.mesbody, twit_info.channel_id)
-
                 # 超过2分钟不入库
                 if delta_time > TIME:
                     continue 
-
+                
+                twit_info = TwitterInfo(key, msg, users[key])
+                can_insert = db_opt.querySql(twit_info.mesbody, twit_info.channel_id)
                 # 数据存在不入库
                 if not can_insert:
                     print('data exist: {}'.format(twit_info.mesbody))
