@@ -7,18 +7,21 @@ from tools import generateHTML
 from crawlerTwitter import TwitterInfo
 from tools import send_msg
 
+# users = {   
+#         '马斯克':'elonmusk',
+#         'Coinbase':'CoinbasePro', 
+#         '孙宇晨':'justinsuntron',
+#         '赵长鹏':'cz_binance',
+#         '灰度创始人':'BarrySilbert',
+#         '火币': 'HuobiGlobal',
+#         '灰度资本': 'Grayscale',
+#         '欧易': 'OKEx',
+#         'Butter':'butterswap',
+#         'MiniDoge':'MiniDOGEToken',
+#         'BabyDoge':'BabyDogeCoin'
+#     }
 users = {   
-        '马斯克':'elonmusk',
-        'Coinbase':'CoinbasePro', 
-        '孙宇晨':'justinsuntron',
-        '赵长鹏':'cz_binance',
-        '灰度创始人':'BarrySilbert',
-        '火币': 'HuobiGlobal',
-        '灰度资本': 'Grayscale',
-        '欧易': 'OKEx',
-        'Butter':'butterswap',
-        'MiniDoge':'MiniDOGEToken',
-        'BabyDoge':'BabyDogeCoin'
+        'Coinbase':'CoinbasePro'
     }
 account = {
             'AccessKeyID': '******',
@@ -71,6 +74,8 @@ def run(TABLE, TIME=120):
                 #！！！！！！！！！！|
                 # 如果是正表, 发送企业微信
                 if db_opt.TABLE=='t_news_info':
+                    send_msg(twit_info)
+                    send_msg(twit_info)
                     send_msg(twit_info)
                 #！！！！！！！！！！|
                 db_opt.insert(twit_info)
