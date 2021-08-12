@@ -51,7 +51,13 @@ def run(TABLE, TIME=120):
                 if delta_time > TIME:
                     continue 
                 
+
                 twit_info = TwitterInfo(key, msg, users[key])
+                ## 过滤
+                if "Inbound transfers" not in twit_info.msg or "Trading will begin" not in twit_info.msg:
+                    continue 
+                
+
                 can_insert = db_opt.querySql(twit_info.mesbody, twit_info.channel_id)
                 # 数据存在不入库
                 if not can_insert:

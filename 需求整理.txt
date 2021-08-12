@@ -1,0 +1,15 @@
+1、币安上币公告：https://www.binancezh.be/zh-CN/support/announcement/c-48?navId=48
+2、火币上币公告：https://www.huobi.bo/support/zh-cn/list/360000039942
+3、Gate.IO上币公告：https://www.gate.tv/cn/poll
+4、Coinbase Pro上币公告：推特，关键词："Inbound transfers" and "Trading will begin"
+
+备注：其他的推特抓取都暂停掉，以免影响Coinbase Pro的抓取效率。
+
+
+关于网址更换的通知：
+由于这些平台的网址经常更换，请求网址失败或者内容解析异常 持续超过1个小时，则应该通过企业微信应用通知管理员，如此才能保证服务的稳定性。
+
+通知的企业微信应用如下：
+企业ID：ww97599329ed1edc90
+AgentId：1000008
+Secret：6VICSgAMnBbNxAlvxn6jTic7OckTpWTUMNMdx1FiYns

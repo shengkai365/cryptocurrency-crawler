@@ -10,12 +10,12 @@ from tools import send_msg
 
 def test_with_temp_db(TIME):
     TABLE = 't_news_info_temp'
-    run(TABLE,TIME)
+    run(TABLE, TIME)
 
 
 if __name__=="__main__":
     # ----------------------- |
     # 用副表测试整个系统
     # 4h 以内的推特
-    test_with_temp_db(4*60*60)
+    test_with_temp_db(24*60*60)
     # ----------------------——  |
