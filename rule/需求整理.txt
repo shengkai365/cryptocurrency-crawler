@@ -8,8 +8,3 @@
 
 关于网址更换的通知：
 由于这些平台的网址经常更换，请求网址失败或者内容解析异常 持续超过1个小时，则应该通过企业微信应用通知管理员，如此才能保证服务的稳定性。
-
-通知的企业微信应用如下：
-企业ID：ww97599329ed1edc90
-AgentId：1000008
-Secret：6VICSgAMnBbNxAlvxn6jTic7OckTpWTUMNMdx1FiYns

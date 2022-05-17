@@ -5,3 +5,5 @@ fuzzywuzzy
 requests
 oss2
 requests_html
+BeautifulSoup4
+selenium
